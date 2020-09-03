@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
 
-namespace BleakwindBuffet.Data.Entree
+namespace BleakwindBuffet.Data.Entrees
 {
 	public class BriarHeartBurger
 	{
