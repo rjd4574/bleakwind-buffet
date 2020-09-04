@@ -52,7 +52,7 @@ namespace BleakwindBuffet.Data.Drinks
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
-		public bool Ice { get; set; } = false;
+		public bool Ice { get; set; } = true;
 
 		/// <summary>
 		///		Create a list of special instructions to be followed
@@ -63,7 +63,7 @@ namespace BleakwindBuffet.Data.Drinks
 			get
 			{
 				List<string> instructions = new List<string>();
-				if (Ice) instructions.Add("Add ice");
+				if (Ice) instructions.Add("Hold ice");
 				return instructions;
 			}
 		}

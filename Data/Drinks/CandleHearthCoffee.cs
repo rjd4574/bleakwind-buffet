@@ -11,7 +11,7 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
-	class CandleHearthCoffee
+	public class CandleHearthCoffee
 	{ 
 		/// <summary>
 		///		What size is the drink
@@ -82,7 +82,7 @@ namespace BleakwindBuffet.Data.Drinks
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{EnumExt.Print(Size)} {((Decaf) ? "Decaf" : "")} Candlehearth Coffee";
+			return $"{EnumExt.Print(Size)}{((Decaf) ? " Decaf " : " ")}Candlehearth Coffee";
 		}
 	}
 }
