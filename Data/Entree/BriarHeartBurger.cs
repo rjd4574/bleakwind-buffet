@@ -12,7 +12,7 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Entrees
 {
-	public class BriarHeartBurger
+	public class BriarheartBurger
 	{
 		/// <summary>
 		///		Gets the price of the burger
@@ -22,7 +22,7 @@ namespace BleakwindBuffet.Data.Entrees
 		/// <summary>
 		///		Gets the calories of the burger
 		/// </summary>
-		public uint Calories => 732;
+		public uint Calories => 743;
 
 		/// <summary>
 		///		Should the burger have a bun
