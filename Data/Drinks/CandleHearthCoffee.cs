@@ -1,4 +1,5 @@
-﻿/*- CandleHearthCoffee.cs				Created: 27AUG20
+﻿/*- Candleh
+ * earthCoffee.cs				Created: 27AUG20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
  * 
  *	Defines the Drink Candlehearth Coffee (Coffee)
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
-	public class CandleHearthCoffee
+	public class CandlehearthCoffee
 	{ 
 		/// <summary>
 		///		What size is the drink
