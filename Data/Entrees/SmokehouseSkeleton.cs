@@ -13,34 +13,39 @@ namespace BleakwindBuffet.Data.Entrees
 	public class SmokehouseSkeleton
 	{
 		/// <summary>
+		///		Represents the name of the entree as a string.
+		/// </summary>
+		private string _name = "Smokehouse Skeleton";
+
+		/// <summary>
 		///		Gets the price of the Entree
 		/// </summary>
-		public double Price => 5.62;
+		public double Price => EntreeValues.Price(_name);
 
 		/// <summary>
 		///		Gets the calories of the Entree
 		/// </summary>
-		public uint Calories => 602;
+		public uint Calories => EntreeValues.Calories(_name);
 
 		/// <summary>
 		///		Should the Entree include Sausage Links
 		/// </summary>
-		public bool SausageLink { get; set; } = true;
+		public bool SausageLink { get; set; }
 
 		/// <summary>
 		///		Should the Entree include Eggs
 		/// </summary>
-		public bool Egg { get; set; } = true;
+		public bool Egg { get; set; }
 
 		/// <summary>
 		///		Should the Entree includ hash browns
 		/// </summary>
-		public bool HashBrowns { get; set; } = true;
+		public bool HashBrowns { get; set; }
 
 		/// <summary>
 		///		Should the Entree includ pancakes
 		/// </summary>
-		public bool Pancake { get; set; } = true;
+		public bool Pancake { get; set; }
 
 		/// <summary>
 		///		/// <summary>
@@ -60,6 +65,13 @@ namespace BleakwindBuffet.Data.Entrees
 				return instructions;
 			}
 		}
+		/// <summary>
+		///		Constructor, this is where the default values of this Entreer will be set.
+		/// </summary>
+		public SmokehouseSkeleton()
+		{
+			EntreeValues.SetDefaults(_name, this);
+		}
 
 		/// <summary>
 		///		Overrides ToString and returns what Entree this represents
@@ -69,7 +81,7 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </returns>
 		public override string ToString()
 		{
-			return "Smokehouse Skeleton";
+			return _name;
 		}
 	}
 }

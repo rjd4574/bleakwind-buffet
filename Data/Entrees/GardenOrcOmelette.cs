@@ -14,34 +14,39 @@ namespace BleakwindBuffet.Data.Entrees
 	public class GardenOrcOmelette
 	{
 		/// <summary>
+		///		Represents the name of the entree as a string.
+		/// </summary>
+		private string _name = "Garden Orc Omelette";
+
+		/// <summary>
 		///		Gets the price of the Entree
 		/// </summary>
-		public double Price => 4.57;
+		public double Price => EntreeValues.Price(_name);
 
 		/// <summary>
 		///		Gets the calories of the Entree
 		/// </summary>
-		public uint Calories => 404;
+		public uint Calories => EntreeValues.Calories(_name);
 
 		/// <summary>
 		///		Should the Entree include Broccoli
 		/// </summary>
-		public bool Broccoli { get; set; } = true;
+		public bool Broccoli { get; set; }
 
 		/// <summary>
 		///		Should the Entree include Mushrooms
 		/// </summary>
-		public bool Mushrooms { get; set; } = true;
+		public bool Mushrooms { get; set; } 
 
 		/// <summary>
 		///		Should the Entree includ Tomato
 		/// </summary>
-		public bool Tomato { get; set; } = true;
+		public bool Tomato { get; set; } 
 
 		/// <summary>
 		///		Should the Entree includ Cheddar
 		/// </summary>
-		public bool Cheddar { get; set; } = true;
+		public bool Cheddar { get; set; }
 
 		/// <summary>
 		///		Create a list of special instructions to be followed
@@ -61,6 +66,14 @@ namespace BleakwindBuffet.Data.Entrees
 		}
 
 		/// <summary>
+		///		Constructor, this is where the default values of this Entreer will be set.
+		/// </summary>
+		public GardenOrcOmelette()
+		{
+			EntreeValues.SetDefaults(_name, this);
+		}
+
+		/// <summary>
 		///		Overrides ToString and returns what Entree this represents
 		/// </summary>
 		/// <returns>
@@ -68,7 +81,7 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </returns>
 		public override string ToString()
 		{
-			return "Garden Orc Omelette";
+			return _name;
 		}
 	}
 }

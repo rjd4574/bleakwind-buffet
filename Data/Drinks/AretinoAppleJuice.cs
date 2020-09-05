@@ -7,47 +7,49 @@
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
+	/// <summary>
+	///		Class representing the Aretino Apple Juice
+	/// </summary>
 	public class AretinoAppleJuice
 	{
 		/// <summary>
+		///		Represents the name of the drink as a string.
+		/// </summary>
+		private string _name = "Aretino Apple Juice";
+
+		/// <summary>
+		///		Private backing variable for the size of the drink
+		/// </summary>
+		private Size _size;
+
+		/// <summary>
 		///		What size is the drink
 		/// </summary>
-		public Size Size { get; set; } = Size.Small;
+		public Size Size
+		{
+			get => _size;
+			set =>      // Only set the size if the value is valid!
+				_size = (Enum.IsDefined(typeof(Size), value)) ? value :
+					throw new NotImplementedException("Size is Not Defined");
+		}
 
 		/// <summary>
 		///		Gets the price of the Drink based on its size
 		/// </summary>
-		public double Price
-		{
-			get
-			{
-				return ((Size == Size.Small)	? 0.62 :
-						(Size == Size.Medium)	? 0.87 :
-						/* Size.Large */          1.01);
-			}
-		}
+		public double Price => DrinkValues.Price(_name, Size);
 
 		/// <summary>
 		///		Gets the calories of the Drink based on its size
 		/// </summary>
-		public uint Calories
-		{
-			get
-			{
-				return (uint)(	(Size == Size.Small)	? 44 :
-								(Size == Size.Medium)	? 88 :
-								/* Size.Large */          132);
-			}
-		}
+		public uint Calories => DrinkValues.Calories(_name, Size);
 
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
-		public bool Ice { get; set; } = false;
+		public bool Ice { get; set; }
 
 		/// <summary>
 		///		Create a list of special instructions to be followed
@@ -64,6 +66,14 @@ namespace BleakwindBuffet.Data.Drinks
 		}
 
 		/// <summary>
+		///		Constructor, this is where the default values of this drink will be set.
+		/// </summary>
+		public AretinoAppleJuice()
+		{
+			DrinkValues.SetDefaults(_name, this);
+		}
+
+		/// <summary>
 		///		Overrides ToString and returns a discription of the Drink
 		/// </summary>
 		/// <returns>
@@ -71,7 +81,7 @@ namespace BleakwindBuffet.Data.Drinks
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{EnumExt.Print(Size)} Aretino Apple Juice";
+			return $"{EnumExt.Print(Size)} {_name}";
 		}
 	}
 }

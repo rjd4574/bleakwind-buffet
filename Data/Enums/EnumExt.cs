@@ -67,5 +67,6 @@ namespace BleakwindBuffet.Data.Enums
 					throw new ArgumentOutOfRangeException("Size Doesn't Exist");
 			}
 		}
+		
 	}
 }

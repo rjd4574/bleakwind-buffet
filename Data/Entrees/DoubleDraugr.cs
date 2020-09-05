@@ -13,54 +13,59 @@ namespace BleakwindBuffet.Data.Entrees
 	public class DoubleDraugr
 	{
 		/// <summary>
+		///		Represents the name of the entree as a string.
+		/// </summary>
+		private string _name = "Double Draugr";
+
+		/// <summary>
 		///		Gets the price of the burger
 		/// </summary>
-		public double Price => 7.32;
+		public double Price => EntreeValues.Price(_name);
 
 		/// <summary>
 		///		Gets the calories of the burger
 		/// </summary>
-		public uint Calories => 843;
+		public uint Calories => EntreeValues.Calories(_name);
 
 		/// <summary>
 		///		Should the burger have a bun
 		/// </summary>
-		public bool Bun { get; set; } = true;
+		public bool Bun { get; set; }
 
 		/// <summary>
 		///		Should there be ketchup on the burger
 		/// </summary>
-		public bool Ketchup { get; set; } = true;
+		public bool Ketchup { get; set; }
 
 		/// <summary>
 		///		Should there be mustard on the burger
 		/// </summary>
-		public bool Mustard { get; set; } = true;
+		public bool Mustard { get; set; }
 
 		/// <summary>
 		///		Should there be pickle on the burger
 		/// </summary>
-		public bool Pickle { get; set; } = true;
+		public bool Pickle { get; set; }
 
 		/// <summary>
 		///		Should there be cheese on the burger
 		/// </summary>
-		public bool Cheese { get; set; } = true;
+		public bool Cheese { get; set; }
 
 		/// <summary>
 		///		Should there be Tomato on the burger
 		/// </summary>
-		public bool Tomato { get; set; } = true;
+		public bool Tomato { get; set; }
 
 		/// <summary>
 		///		Should there be Lettuce on the burger
 		/// </summary>
-		public bool Lettuce { get; set; } = true;
+		public bool Lettuce { get; set; }
 
 		/// <summary>
 		///		Should there be Mayo on the burger
 		/// </summary>
-		public bool Mayo { get; set; } = true;
+		public bool Mayo { get; set; }
 
 		/// <summary>
 		///		Create a list of special instructions to be followed
@@ -84,6 +89,14 @@ namespace BleakwindBuffet.Data.Entrees
 		}
 
 		/// <summary>
+		///		Constructor, this is where the default values of this Entreer will be set.
+		/// </summary>
+		public DoubleDraugr()
+		{
+			EntreeValues.SetDefaults(_name, this);
+		}
+
+		/// <summary>
 		///		Overrides and returns what Entree this represents
 		/// </summary>
 		/// <returns>
@@ -91,7 +104,7 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </returns>
 		public override string ToString()
 		{
-			return "Double Draugr";
+			return _name;
 		}
 	}
 }

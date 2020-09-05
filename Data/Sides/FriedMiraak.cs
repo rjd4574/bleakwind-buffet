@@ -7,48 +7,55 @@
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BleakwindBuffet.Data.Sides
 {
 	public class FriedMiraak
 	{
 		/// <summary>
-		///		What size is the Side
+		///		Represents the name of the side as a string.
 		/// </summary>
-		public Size Size { get; set; } = Size.Small;
+		private string _name = "Fried Miraak";
+
+		/// <summary>
+		///		Private backing variable for the size of the side
+		/// </summary>
+		private Size _size;
+
+		/// <summary>
+		///		What size is the side
+		/// </summary>
+		public Size Size
+		{
+			get => _size;
+			set =>      // Only set the size if the value is valid!
+				_size = (Enum.IsDefined(typeof(Size), value)) ? value :
+					throw new NotImplementedException("Size is Not Defined");
+		}
 
 		/// <summary>
 		///		Gets the price of the side based on its size
 		/// </summary>
-		public double Price
-		{
-			get
-			{
-				return ((Size == Size.Small)	? 1.78 :
-						(Size == Size.Medium)	? 2.01 :
-						/* Size.Large */          2.88);
-			}
-		}
+		public double Price => SideValues.Price(_name, Size);
 
 		/// <summary>
 		///		Gets the calories of the side based on its size
 		/// </summary>
-		public uint Calories
-		{
-			get
-			{
-				return (uint)(	(Size == Size.Small)	? 151 :
-								(Size == Size.Medium)	? 236 :
-								/* Size.Large */          306);
-			}
-		}
+		public uint Calories => SideValues.Calories(_name, Size);
 
 		/// <summary>
 		///		There are no special instructions available for sides,
 		///		This results in return of an empty list
 		/// </summary>
 		public List<string> SpecialInstructions => new List<string>();
+
+		/// <summary>
+		///		Constructor, this is where the default values of this drink will be set.
+		/// </summary>
+		public FriedMiraak()
+		{
+			SideValues.SetDefaults(_name, this);
+		}
 
 		/// <summary>
 		///		Overrides ToString and returns a discription of the side
@@ -58,7 +65,7 @@ namespace BleakwindBuffet.Data.Sides
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{EnumExt.Print(Size)} Fried Miraak";
+			return $"{EnumExt.Print(Size)} {_name}";
 		}
 	}
 }

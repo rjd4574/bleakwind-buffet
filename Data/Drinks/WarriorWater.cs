@@ -11,32 +11,48 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
-	class WarriorWater
-	{ 
+	public class WarriorWater
+	{
+		/// <summary>
+		///		Represents the name of the drink as a string.
+		/// </summary>
+		private string _name = "Warrior Water";
+
+		/// <summary>
+		///		Private backing variable for the size of the drink
+		/// </summary>
+		private Size _size;
+
 		/// <summary>
 		///		What size is the drink
 		/// </summary>
-		public Size Size { get; set; } = Size.Small;
+		public Size Size
+		{
+			get => _size;
+			set =>      // Only set the size if the value is valid!
+				_size = (Enum.IsDefined(typeof(Size), value)) ? value :
+					throw new NotImplementedException("Size is Not Defined");
+		}
 
 		/// <summary>
 		///		Gets the price of the Drink based on its size
 		/// </summary>
-		public double Price => 0.0;
+		public double Price => DrinkValues.Price(_name, Size);
 
 		/// <summary>
 		///		Gets the calories of the Drink based on its size
 		/// </summary>
-		public uint Calories => 0;
+		public uint Calories => DrinkValues.Calories(_name, Size);
 
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
-		public bool Ice { get; set; } = true;
+		public bool Ice { get; set; }
 
 		/// <summary>
 		///		Should the drink come with lemon
 		/// </summary>
-		public bool Lemon { get; set; } = false;
+		public bool Lemon { get; set; }
 
 		/// <summary>
 		///		Create a list of special instructions to be followed
@@ -54,6 +70,14 @@ namespace BleakwindBuffet.Data.Drinks
 		}
 
 		/// <summary>
+		///		Constructor, this is where the default values of this drink will be set.
+		/// </summary>
+		public WarriorWater()
+		{
+			DrinkValues.SetDefaults(_name, this);
+		}
+
+		/// <summary>
 		///		Overrides ToString and returns a discription of the Drink
 		/// </summary>
 		/// <returns>
@@ -61,7 +85,7 @@ namespace BleakwindBuffet.Data.Drinks
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{EnumExt.Print(Size)} Warrior Water";
+			return $"{EnumExt.Print(Size)} {_name}";
 		}
 	}
 }
