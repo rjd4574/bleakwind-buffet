@@ -10,6 +10,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Entrees
 {
+	/// <summary>
+	///		Describes the Double draugr burger class
+	/// </summary>
 	public class DoubleDraugr
 	{
 		/// <summary>

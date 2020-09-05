@@ -12,6 +12,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Enums
 {
+	/// <summary>
+	/// Static class to extend functionality of Enums
+	/// </summary>
 	public static class EnumExt
 	{
 		/// <summary>

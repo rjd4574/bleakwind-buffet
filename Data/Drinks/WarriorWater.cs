@@ -7,10 +7,12 @@
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
+	/// <summary>
+	///		Defines the warrior water class
+	/// </summary>
 	public class WarriorWater
 	{
 		/// <summary>

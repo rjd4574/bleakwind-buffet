@@ -11,6 +11,9 @@ using System.Text;
 namespace BleakwindBuffet.Data.Entrees
 {
 
+	/// <summary>
+	/// Describes the thugs T-Bone class
+	/// </summary>
 	public class ThugsTBone
 	{
 		/// <summary>

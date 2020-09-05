@@ -11,6 +11,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Entrees
 {
+	/// <summary>
+	///		Desbribes the garden orc omelette class
+	/// </summary>
 	public class GardenOrcOmelette
 	{
 		/// <summary>

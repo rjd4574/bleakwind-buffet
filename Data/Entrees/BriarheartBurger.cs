@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace BleakwindBuffet.Data.Entrees
 {
+	/// <summary>
+	///		Describes the briarheart burger class
+	/// </summary>
 	public class BriarheartBurger
 	{
 		/// <summary>

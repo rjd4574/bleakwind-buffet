@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace BleakwindBuffet.Data.Sides
 {
+	/// <summary>
+	///		Describes the mad otar grits class
+	/// </summary>
 	public class MadOtarGrits
 	{
 		/// <summary>

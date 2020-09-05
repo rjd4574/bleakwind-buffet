@@ -143,7 +143,7 @@ namespace BleakwindBuffet.Data.Sides
 	}
 }
 
-/*
+/* copy/paste for creating new definitions 
 switch (side)
 {
 	case "Vokun Salad": return;

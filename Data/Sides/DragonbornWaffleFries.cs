@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace BleakwindBuffet.Data.Sides
 {
+	/// <summary>
+	///		Describes the dragonborn waffle fries class
+	/// </summary>
 	public class DragonbornWaffleFries
 	{
 		/// <summary>

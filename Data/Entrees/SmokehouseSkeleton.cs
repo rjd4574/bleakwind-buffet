@@ -10,6 +10,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Entrees
 {
+	/// <summary>
+	///		Describes the smokehouse skeleton class
+	/// </summary>
 	public class SmokehouseSkeleton
 	{
 		/// <summary>

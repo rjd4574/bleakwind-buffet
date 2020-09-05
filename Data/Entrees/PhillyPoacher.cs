@@ -10,6 +10,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Entrees
 {
+	/// <summary>
+	///		Describes the phillypoacher class
+	/// </summary>
 	public class PhillyPoacher
 	{
 		/// <summary>

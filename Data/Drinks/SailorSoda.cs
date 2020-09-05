@@ -11,6 +11,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
+	/// <summary>
+	///		Describes the sailor soda drink
+	/// </summary>
 	public class SailorSoda
 	{
 		/// <summary>

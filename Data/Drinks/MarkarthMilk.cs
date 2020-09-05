@@ -11,6 +11,9 @@ using System.Text;
 
 namespace BleakwindBuffet.Data.Drinks
 {
+	/// <summary>
+	///		Describes the Markarth Milk class
+	/// </summary>
 	public class MarkarthMilk
 	{
 		/// <summary>

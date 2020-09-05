@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace BleakwindBuffet.Data.Sides
 {
+	/// <summary>
+	///		Describes the fried miraak class
+	/// </summary>
 	public class FriedMiraak
 	{
 		/// <summary>
