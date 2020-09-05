@@ -3,7 +3,7 @@
  * 
  *	This consolidates all information about BleakwindBuffet's 
  *	drinks all in one spot. You can change defaults/price/calories/
- *	or any other property.
+ *	or any other property..
  */
 
 
