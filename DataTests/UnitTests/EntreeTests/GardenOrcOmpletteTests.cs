@@ -20,6 +20,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	public class GardenOrcOmeletteTests
     {
 		/// <summary>
+		///		Ensure that this entree inherits from Entree
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnEntree()
+		{
+			var entree = new GardenOrcOmelette();
+			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
 		///		Ensure there is broccoli by default
 		/// </summary>
 		[Fact]
@@ -27,7 +37,6 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
         {
 			Assert.True(new GardenOrcOmelette().Broccoli);
         }
-
 
 		/// <summary>
 		///		Ensure there is mushroom by default

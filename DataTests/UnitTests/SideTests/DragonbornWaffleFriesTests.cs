@@ -18,7 +18,17 @@ namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 	///		Tests the correct functionality of Vokun Salad side class
 	/// </summary>
 	public class DragonbornWaffleFriesTests
-	{ 
+	{
+		/// <summary>
+		///		Ensure that this side inherits from Side
+		/// </summary>
+		[Fact]
+		public void ShouldBeASide()
+		{
+			var side = new DragonbornWaffleFries();
+			Assert.IsAssignableFrom<Side>(side);
+		}
+
 		/// <summary>
 		///		Ensure the side is small by default
 		/// </summary>

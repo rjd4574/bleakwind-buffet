@@ -20,6 +20,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	public class DoubleDraugrTests
     {
 		/// <summary>
+		///		Ensure that this entree inherits from Entree
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnEntree()
+		{
+			var entree = new DoubleDraugr();
+			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
 		///		Ensure there is a bun by default
 		/// </summary>
 		[Fact]

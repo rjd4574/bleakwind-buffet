@@ -20,6 +20,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 	public class WarriorWaterTest
 	{
 		/// <summary>
+		///		Ensure that this drink inherits from Drink
+		/// </summary>
+		[Fact]
+		public void ShouldBeADrink()
+		{
+			var water = new WarriorWater();
+			Assert.IsAssignableFrom<Drink>(water);
+		}
+
+		/// <summary>
 		///		Ensure there is ice by default 
 		/// </summary>
 		[Fact]
@@ -74,11 +84,11 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 		{
 			var drink = new CandlehearthCoffee();
 
-			drink.Lemon = true;
-			Assert.True(drink.Lemon);
+			drink.Decaf = true;
+			Assert.True(drink.Decaf);
 
-			drink.Lemon = false;
-			Assert.False(drink.Lemon);
+			drink.Decaf = false;
+			Assert.False(drink.Decaf);
 		}
 
 		/// <summary>

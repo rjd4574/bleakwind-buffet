@@ -14,39 +14,8 @@ namespace BleakwindBuffet.Data.Drinks
 	/// <summary>
 	///		Describes the Markarth Milk class
 	/// </summary>
-	public class MarkarthMilk
+	public class MarkarthMilk : Drink
 	{
-		/// <summary>
-		///		Represents the name of the drink as a string.
-		/// </summary>
-		private string _name = "Markarth Milk";
-
-		/// <summary>
-		///		Private backing variable for the size of the drink
-		/// </summary>
-		private Size _size;
-
-		/// <summary>
-		///		What size is the drink
-		/// </summary>
-		public Size Size
-		{
-			get => _size;
-			set =>      // Only set the size if the value is valid!
-				_size = (Enum.IsDefined(typeof(Size), value)) ? value :
-					throw new NotImplementedException("Size is Not Defined");
-		}
-
-		/// <summary>
-		///		Gets the price of the Drink based on its size
-		/// </summary>
-		public double Price => DrinkValues.Price(_name, Size);
-
-		/// <summary>
-		///		Gets the calories of the Drink based on its size
-		/// </summary>
-		public uint Calories => DrinkValues.Calories(_name, Size);
-
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
@@ -56,7 +25,7 @@ namespace BleakwindBuffet.Data.Drinks
 		///		Create a list of special instructions to be followed
 		///		when making the Drink
 		/// </summary>
-		public List<string> SpecialInstructions
+		public override List<string> SpecialInstructions
 		{
 			get
 			{
@@ -71,18 +40,8 @@ namespace BleakwindBuffet.Data.Drinks
 		/// </summary>
 		public MarkarthMilk()
 		{
-			DrinkValues.SetDefaults(_name, this);
-		}
-
-		/// <summary>
-		///		Overrides ToString and returns a discription of the Drink
-		/// </summary>
-		/// <returns>
-		///		Summery depicting the drinks attributes
-		/// </returns>
-		public override string ToString()
-		{ 
-			return $"{EnumExt.Print(Size)} {_name}";
+			_name = "Markarth Milk";
+			DrinkValues.SetDefaults(this);
 		}
 	}
 }

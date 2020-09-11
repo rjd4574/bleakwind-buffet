@@ -20,6 +20,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	public class ThugsTBoneTests
     {
 		/// <summary>
+		///		Ensure that this entree inherits from Entree
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnEntree()
+		{
+			var entree = new ThugsTBone();
+			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
 		///		Ensure that the entree is priced correctly
 		/// </summary>
 		[Fact]

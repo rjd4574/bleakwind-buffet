@@ -20,9 +20,19 @@ namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 	public class VokunSaladTests
     {
 		/// <summary>
+		///		Ensure that this side inherits from Side
+		/// </summary>
+		[Fact]
+		public void ShouldBeASide()
+		{
+			var side = new VokunSalad();
+			Assert.IsAssignableFrom<Side>(side);
+		}
+
+		/// <summary>
 		///		Ensure the side is small by default
 		/// </summary>
-        [Fact]
+		[Fact]
         public void ShouldBeSmallByDefault()
         {
 			Assert.Equal(Size.Small, new VokunSalad().Size);

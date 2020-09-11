@@ -21,6 +21,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
     public class AretinoAppleJuiceTests
     {
 		/// <summary>
+		///		Ensure that this drink inherits from Drink
+		/// </summary>
+		[Fact]
+		public void ShouldBeADrink()
+		{
+			var apple = new AretinoAppleJuice();
+			Assert.IsAssignableFrom<Drink>(apple);
+		}
+
+		/// <summary>
 		///		Ensure there is no ice by default
 		/// </summary>
         [Fact]

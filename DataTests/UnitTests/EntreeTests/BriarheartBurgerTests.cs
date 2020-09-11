@@ -19,10 +19,20 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
     public class BriarheartBurgerTests
     {
-        /// <summary>
+		/// <summary>
+		///		Ensure that this entree inherits from Entree
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnEntree()
+		{
+			var entree = new BriarheartBurger();
+			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
 		///		Ensure there is a bun by default
 		/// </summary>
-        [Fact]
+		[Fact]
         public void ShouldIncludeBunByDefault()
         {
 			var entree = new BriarheartBurger();

@@ -13,23 +13,8 @@ namespace BleakwindBuffet.Data.Entrees
 	/// <summary>
 	///		Describes the phillypoacher class
 	/// </summary>
-	public class PhillyPoacher
+	public class PhillyPoacher : Entree
 	{
-		/// <summary>
-		///		Represents the name of the entree as a string.
-		/// </summary>
-		private string _name = "Philly Poacher";
-
-		/// <summary>
-		///		Gets the price of the Entree
-		/// </summary>
-		public double Price => EntreeValues.Price(_name);
-
-		/// <summary>
-		///		Gets the calories of the Entree
-		/// </summary>
-		public uint Calories => EntreeValues.Calories(_name);
-
 		/// <summary>
 		///		Should the Entree include Sirloin
 		/// </summary>
@@ -49,7 +34,7 @@ namespace BleakwindBuffet.Data.Entrees
 		///		Create a list of special instructions to be followed
 		///		when making the Entree
 		/// </summary>
-		public List<string> SpecialInstructions
+		public override List<string> SpecialInstructions
 		{
 			get
 			{
@@ -66,18 +51,8 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </summary>
 		public PhillyPoacher()
 		{
-			EntreeValues.SetDefaults(_name, this);
-		}
-
-		/// <summary>
-		///		Overrides ToString and returns what Entree this represents
-		/// </summary>
-		/// <returns>
-		///		This Entree's name!
-		/// </returns>
-		public override string ToString()
-		{
-			return _name;
+			_name = "Philly Poacher";
+			EntreeValues.SetDefaults(this);
 		}
 	}
 }

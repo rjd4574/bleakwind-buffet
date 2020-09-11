@@ -20,6 +20,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	public class SmokehouseSkeletonTests
     {
 		/// <summary>
+		///		Ensure that this entree inherits from Entree
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnEntree()
+		{
+			var entree = new SmokehouseSkeleton();
+			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
 		///		Ensure there is sausage by default
 		/// </summary>
 		[Fact]

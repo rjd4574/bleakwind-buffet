@@ -12,23 +12,8 @@ namespace BleakwindBuffet.Data.Entrees
 	/// <summary>
 	///		Describes the briarheart burger class
 	/// </summary>
-	public class BriarheartBurger
-	{
-		/// <summary>
-		///		Represents the name of the entree as a string.
-		/// </summary>
-		private string _name = "Briarheart Burger";
-
-		/// <summary>
-		///		Gets the price of the burger
-		/// </summary>
-		public double Price => EntreeValues.Price(_name);
-
-		/// <summary>
-		///		Gets the calories of the burger
-		/// </summary>
-		public uint Calories => EntreeValues.Calories(_name);
-
+	public class BriarheartBurger : Entree
+	{ 
 		/// <summary>
 		///		Should the burger have a bun
 		/// </summary>
@@ -58,7 +43,7 @@ namespace BleakwindBuffet.Data.Entrees
 		///		Create a list of special instructions to be followed
 		///		when making the burger
 		/// </summary>
-		public List<string> SpecialInstructions
+		public override List<string> SpecialInstructions
 		{
 			get
 			{
@@ -77,18 +62,8 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </summary>
 		public BriarheartBurger()
 		{
-			EntreeValues.SetDefaults(_name, this);
-		}
-
-		/// <summary>
-		///		Overrides and returns what Entree this represents
-		/// </summary>
-		/// <returns>
-		///		This burger's name!
-		/// </returns>
-		public override string ToString()
-		{
-			return _name;
+			_name = "Briarheart Burger";
+			EntreeValues.SetDefaults(this);
 		}
 	}
 }

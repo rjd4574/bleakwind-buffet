@@ -14,23 +14,8 @@ namespace BleakwindBuffet.Data.Entrees
 	/// <summary>
 	///		Desbribes the garden orc omelette class
 	/// </summary>
-	public class GardenOrcOmelette
+	public class GardenOrcOmelette : Entree
 	{
-		/// <summary>
-		///		Represents the name of the entree as a string.
-		/// </summary>
-		private string _name = "Garden Orc Omelette";
-
-		/// <summary>
-		///		Gets the price of the Entree
-		/// </summary>
-		public double Price => EntreeValues.Price(_name);
-
-		/// <summary>
-		///		Gets the calories of the Entree
-		/// </summary>
-		public uint Calories => EntreeValues.Calories(_name);
-
 		/// <summary>
 		///		Should the Entree include Broccoli
 		/// </summary>
@@ -55,7 +40,7 @@ namespace BleakwindBuffet.Data.Entrees
 		///		Create a list of special instructions to be followed
 		///		when making the Entree
 		/// </summary>
-		public List<string> SpecialInstructions
+		public override List<string> SpecialInstructions
 		{
 			get
 			{
@@ -73,18 +58,8 @@ namespace BleakwindBuffet.Data.Entrees
 		/// </summary>
 		public GardenOrcOmelette()
 		{
-			EntreeValues.SetDefaults(_name, this);
-		}
-
-		/// <summary>
-		///		Overrides ToString and returns what Entree this represents
-		/// </summary>
-		/// <returns>
-		///		This Entree's name!
-		/// </returns>
-		public override string ToString()
-		{
-			return _name;
+			_name = "Garden Orc Omelette";
+			EntreeValues.SetDefaults(this);
 		}
 	}
 }

@@ -21,9 +21,19 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
     public class CandlehearthCoffeeTests
     {
 		/// <summary>
+		///		Ensure that this drink inherits from Drink
+		/// </summary>
+		[Fact]
+		public void ShouldBeADrink()
+		{
+			var coffee = new CandlehearthCoffee();
+			Assert.IsAssignableFrom<Drink>(coffee);
+		}
+
+		/// <summary>
 		///		Ensure there is no ice by default 
 		/// </summary>
-        [Fact]
+		[Fact]
         public void ShouldNotIncludeIceByDefault()
         {
 			var drink = new CandlehearthCoffee();
@@ -37,7 +47,7 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
         public void ShouldNotBeDecafByDefault()
         {
 			var drink = new CandlehearthCoffee();
-			Assert.False(drink.Lemon);
+			Assert.False(drink.Decaf);
 		}
 
 		/// <summary>
@@ -85,11 +95,11 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
         {
 			var drink = new CandlehearthCoffee();
 
-			drink.Lemon = true;
-			Assert.True(drink.Lemon);
+			drink.Decaf = true;
+			Assert.True(drink.Decaf);
 
-			drink.Lemon = false;
-			Assert.False(drink.Lemon);
+			drink.Decaf = false;
+			Assert.False(drink.Decaf);
 		}
 
 		/// <summary>
@@ -218,7 +228,7 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 			var drink = new CandlehearthCoffee();
 
 			drink.Size = size;
-			drink.Lemon = decaf;
+			drink.Decaf = decaf;
 
 			Assert.Equal(name, drink.ToString());
 		}

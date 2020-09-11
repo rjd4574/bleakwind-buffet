@@ -15,7 +15,6 @@ using System;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Drinks;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 {
@@ -25,9 +24,19 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
     public class SailorSodaTests
     {
 		/// <summary>
+		///		Ensure that this drink inherits from Drink
+		/// </summary>
+		[Fact]
+		public void ShouldBeADrink()
+		{
+			var soda = new SailorSoda();
+			Assert.IsAssignableFrom<Drink>(soda);
+		}
+
+		/// <summary>
 		///		Ensure there is ice by default
 		/// </summary>
-        [Fact]
+		[Fact]
         public void ShouldIncludeIceByDefault()
         {
 			var drink = new SailorSoda();

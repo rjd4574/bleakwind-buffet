@@ -19,137 +19,142 @@ namespace BleakwindBuffet.Data.Sides
 	{
 		/// <summary>
 		///		This is called in the constructor of a side.
-		///		All of the drink's default settings can be found here
+		///		All of the Side's default settings can be found here
 		/// </summary>
-		/// <param name="side">The name of the side</param>
-		/// <param name="d">A reference to the side</param>
-		public static void SetDefaults(string side, Object s)
+		/// <param name="side">Reference to the sidee</param>
+		///  <exception cref="NotImplementedException">if the side or size types are not implimented</exception>"
+		public static void SetDefaults(Side side)
 		{
-			switch (side)
+			if (side is VokunSalad)
 			{
-				case "Vokun Salad":
-					var salad = (VokunSalad)s;
-					salad.Size = Size.Small;
-					break;
-				case "Fried Miraak":
-					var miraak = (FriedMiraak)s;
-					miraak.Size = Size.Small;
-					break;
-				case "Mad Otar Grits":
-					var grits = (MadOtarGrits)s;
-					grits.Size = Size.Small;
-					break;
-				case "Dragonborn Waffle Fries":
-					var fries = (DragonbornWaffleFries)s;
-					fries.Size = Size.Small;
-					break;
-				default: throw new NotImplementedException("Side Not Found");
+				side.Size = Size.Small;
+				return;
 			}
+			if (side is FriedMiraak)
+			{
+				side.Size = Size.Small;
+				return;
+			}
+			if (side is MadOtarGrits)
+			{
+				side.Size = Size.Small;
+				return;
+			}
+			if (side is DragonbornWaffleFries)
+			{
+				side.Size = Size.Small;
+				return;
+			}
+			
+			throw new NotImplementedException("Side Not Found");
 		}
 
 		/// <summary>
-		///		Defines the prices of all side
+		///		Defines the prices of all sides
 		/// </summary>
-		/// <param name="side">The name of the side</param>
+		/// <param name="side">reference to the side</param>
 		/// <param name="size">The size of the side</param>
-		/// <returns>THe price of the drink given its name and size</returns>
-		public static double Price(string side, Size size)
+		/// <returns>THe price of the Side in its current state</returns>
+		/// <exception cref="NotImplementedException">if the side or size types are not implimented</exception>"
+		public static double Price(Side side)
 		{
-			switch (side)
+			if (side is VokunSalad)
 			{
-				case "Vokun Salad":
-					switch (size)
-					{
-						case Size.Small: return 0.93;
-						case Size.Medium: return 1.28;
-						case Size.Large: return 1.82;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Fried Miraak":
-					switch (size)
-					{
-						case Size.Small: return 1.78;
-						case Size.Medium: return 2.01;
-						case Size.Large: return 2.88;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Mad Otar Grits": 
-					switch (size)
-					{
-						case Size.Small: return 1.22;
-						case Size.Medium: return 1.58;
-						case Size.Large: return 1.93;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Dragonborn Waffle Fries":
-					switch (size)
-					{
-						case Size.Small: return 0.42;
-						case Size.Medium: return 0.76;
-						case Size.Large: return 0.96;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				default: throw new NotImplementedException("Side Not Found");
+				switch (side.Size)
+				{
+					case Size.Small: return 0.93;
+					case Size.Medium: return 1.28;
+					case Size.Large: return 1.82;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
 			}
+			if (side is FriedMiraak)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 1.78;
+					case Size.Medium: return 2.01;
+					case Size.Large: return 2.88;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+			if (side is MadOtarGrits)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 1.22;
+					case Size.Medium: return 1.58;
+					case Size.Large: return 1.93;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+			if (side is DragonbornWaffleFries)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 0.42;
+					case Size.Medium: return 0.76;
+					case Size.Large: return 0.96;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+				
+			throw new NotImplementedException("Side Not Found");
 		}
 
 		/// <summary>
-		///		Defines the calories in all of the side
+		///		Defines the calories in all of the sides
 		/// </summary>
-		/// <param name="side">The name of the side</param>
-		/// <param name="size">The size of the side</param>
-		/// <returns>The amount of calories in the drink given its 
-		/// name and size
-		/// </returns>
-		public static uint Calories(string side, Size size)
+		/// <param name="side">reference to the side</param>
+		/// <returns>The amount of calories in the side given its 
+		/// name and size</returns>
+		/// <exception cref="NotImplementedException">if the side or size types are not implimented</exception>"
+		public static uint Calories(Side side)
 		{
-			switch (side)
+			if (side is VokunSalad)
 			{
-				case "Vokun Salad":
-					switch (size)
-					{
-						case Size.Small: return 41;
-						case Size.Medium: return 52;
-						case Size.Large: return 73;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Fried Miraak":
-					switch (size)
-					{
-						case Size.Small: return 151;
-						case Size.Medium: return 236;
-						case Size.Large: return 306;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Mad Otar Grits":
-					switch (size)
-					{
-						case Size.Small: return 105;
-						case Size.Medium: return 142;
-						case Size.Large: return 179;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				case "Dragonborn Waffle Fries":
-					switch (size)
-					{
-						case Size.Small: return 77;
-						case Size.Medium: return 89;
-						case Size.Large: return 100;
-						default: throw new NotImplementedException("Side Size not Defined");
-					}
-				default: throw new NotImplementedException("Side Not Found");
+				switch (side.Size)
+				{
+					case Size.Small: return 41;
+					case Size.Medium: return 52;
+					case Size.Large: return 73;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
 			}
+			if (side is FriedMiraak)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 151;
+					case Size.Medium: return 236;
+					case Size.Large: return 306;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+			if (side is MadOtarGrits)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 105;
+					case Size.Medium: return 142;
+					case Size.Large: return 179;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+			if (side is DragonbornWaffleFries)
+			{
+				switch (side.Size)
+				{
+					case Size.Small: return 77;
+					case Size.Medium: return 89;
+					case Size.Large: return 100;
+					default: throw new NotImplementedException("Side Size not Defined");
+				}
+			}
+			
+			throw new NotImplementedException("Side Not Found");
 		}
 	}
 }
 
-/* copy/paste for creating new definitions 
-switch (side)
-{
-	case "Vokun Salad": return;
-	case "Fried Miraak": return;
-	case "Mad Otar Grits": return;
-	case "Dragonborn Waffle Fries": return;
-	default: throw new NotImplementedException("Side Not Found");
-}
-*/
+

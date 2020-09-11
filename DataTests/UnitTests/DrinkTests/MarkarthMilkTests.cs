@@ -22,9 +22,19 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 	public class MarkarthMilkTests
     {
 		/// <summary>
+		///		Ensure that this drink inherits from Drink
+		/// </summary>
+		[Fact]
+		public void ShouldBeADrink()
+		{
+			var milk = new MarkarthMilk();
+			Assert.IsAssignableFrom<Drink>(milk);
+		}
+
+		/// <summary>
 		///		Ensure the drink does not include Ice by default
 		/// </summary>
-        [Fact]
+		[Fact]
         public void ShouldNotIncludeIceByDefault()
         {
 			var drink = new MarkarthMilk();
