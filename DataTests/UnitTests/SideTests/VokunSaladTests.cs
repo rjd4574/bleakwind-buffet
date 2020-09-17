@@ -11,6 +11,7 @@ using System;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Sides;
+using BleakwindBuffet.Data;
 
 namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 {
@@ -27,6 +28,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 		{
 			var side = new VokunSalad();
 			Assert.IsAssignableFrom<Side>(side);
+		}
+
+		/// <summary>
+		///		Ensure that this item implements the IOrderItem interface
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnIOrderItem()
+		{
+			var orderItem = new VokunSalad();
+			Assert.IsAssignableFrom<IOrderItem>(orderItem);
 		}
 
 		/// <summary>

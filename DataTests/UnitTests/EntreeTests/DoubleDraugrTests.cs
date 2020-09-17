@@ -11,6 +11,7 @@ using Xunit;
 
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
+using BleakwindBuffet.Data;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -27,6 +28,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 		{
 			var entree = new DoubleDraugr();
 			Assert.IsAssignableFrom<Entree>(entree);
+		}
+
+		/// <summary>
+		///		Ensure that this item implements the IOrderItem interface
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnIOrderItem()
+		{
+			var orderItem = new DoubleDraugr();
+			Assert.IsAssignableFrom<IOrderItem>(orderItem);
 		}
 
 		/// <summary>

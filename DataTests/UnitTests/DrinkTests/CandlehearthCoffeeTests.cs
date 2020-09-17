@@ -12,6 +12,7 @@ using System;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Drinks;
+using BleakwindBuffet.Data;
 
 namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 {
@@ -28,6 +29,16 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 		{
 			var coffee = new CandlehearthCoffee();
 			Assert.IsAssignableFrom<Drink>(coffee);
+		}
+
+		/// <summary>
+		///		Ensure that this item implements the IOrderItem interface
+		/// </summary>
+		[Fact]
+		public void ShouldBeAnIOrderItem()
+		{
+			var orderItem = new CandlehearthCoffee();
+			Assert.IsAssignableFrom<IOrderItem>(orderItem);
 		}
 
 		/// <summary>
