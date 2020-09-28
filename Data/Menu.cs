@@ -125,5 +125,60 @@ namespace BleakwindBuffet.Data
 
 			return list;
 		}
+
+
+
+		/// <summary>
+		///		Creates one instance of every Entree
+		/// </summary>
+		/// <returns> A list of Entree items </returns>
+		public static IEnumerable<IOrderItem> EntreeItems()
+		{
+			List<IOrderItem> list = new List<IOrderItem>();
+
+
+			list.Add(new BriarheartBurger());
+			list.Add(new DoubleDraugr());
+			list.Add(new GardenOrcOmelette());
+			list.Add(new PhillyPoacher());
+			list.Add(new SmokehouseSkeleton());
+			list.Add(new ThalmorTriple());
+			list.Add(new ThugsTBone());
+			return list;
+		}
+
+		/// <summary>
+		///		Creates one instance of every Drink
+		/// </summary>
+		/// <returns> A list of Drink items </returns>
+		public static IEnumerable<IOrderItem> DrinkItems()
+		{
+			List<IOrderItem> list = new List<IOrderItem>();
+			list.Add(new AretinoAppleJuice());
+			list.Add(new CandlehearthCoffee());
+			list.Add(new MarkarthMilk());
+			list.Add(new SailorSoda());
+			list.Add(new WarriorWater());
+
+			return list;
+		}
+
+		/// <summary>
+		///		Creates one instance of every Side
+		/// </summary>
+		/// <returns> A list of Side items </returns>
+		public static IEnumerable<IOrderItem> SideItems()
+		{
+			List<IOrderItem> list = new List<IOrderItem>();
+
+			list.Add(new DragonbornWaffleFries());
+			list.Add(new FriedMiraak());
+			list.Add(new MadOtarGrits());
+			list.Add(new VokunSalad());
+
+			return list;
+		}
+
+
 	}
 }

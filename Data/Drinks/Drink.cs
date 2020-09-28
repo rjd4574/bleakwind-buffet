@@ -23,7 +23,7 @@ namespace BleakwindBuffet.Data.Drinks
 		/// <summary>
 		/// The name of the drink
 		/// </summary>
-		public string Name { get; }
+		public string Name => _name;
 
 		/// <summary>
 		///		Private backing variable for the Size of the drink

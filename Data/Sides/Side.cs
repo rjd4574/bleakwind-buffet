@@ -23,7 +23,7 @@ namespace BleakwindBuffet.Data.Sides
 		/// <summary>
 		/// The name of the side
 		/// </summary>
-		public string Name { get; }
+		public string Name => _name;
 
 		/// <summary>
 		///		Private backing variable for the Size of the side

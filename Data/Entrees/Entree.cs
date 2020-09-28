@@ -22,7 +22,7 @@ namespace BleakwindBuffet.Data.Entrees
 		/// <summary>
 		/// The name of the Entree
 		/// </summary>
-		public string Name { get; }
+		public string Name => _name;
 
 		/// <summary>
 		///		Gets the price of the Entree
