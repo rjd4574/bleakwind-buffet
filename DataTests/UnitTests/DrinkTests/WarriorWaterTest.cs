@@ -12,6 +12,7 @@ using System;
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Drinks;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 {
@@ -20,6 +21,46 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 	/// </summary>
 	public class WarriorWaterTest
 	{
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new WarriorWater();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies ice when ice is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingIceNotifiesIceProperty()
+		{
+			var drink = new WarriorWater();
+			drink.Ice = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = true; });
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies size when size is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesSizeProperty()
+		{
+			var drink = new WarriorWater();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Small; });
+		}
+
 		/// <summary>
 		///		Ensure that this drink inherits from Drink
 		/// </summary>

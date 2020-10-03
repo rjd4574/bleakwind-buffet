@@ -3,7 +3,7 @@
  * Class: SmokehouseSkeletonTests.cs
  * Purpose: Test the SmokehouseSkeleton.cs class in the Data library
  */
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Modified: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 
@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,70 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class SmokehouseSkeletonTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new SmokehouseSkeleton();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies SausageLink when SausageLink is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSausageLinkNotifiesSausageLinkProperty()
+		{
+			var entree = new SmokehouseSkeleton();
+			entree.SausageLink = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "SausageLink", () => { entree.SausageLink = true; });
+			Assert.PropertyChanged(entree, "SausageLink", () => { entree.SausageLink = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Egg when Egg is changed
+		/// </summary>
+		[Fact]
+		public void ChangingEggNotifiesEggProperty()
+		{
+			var entree = new SmokehouseSkeleton();
+			entree.Egg = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Egg", () => { entree.Egg = true; });
+			Assert.PropertyChanged(entree, "Egg", () => { entree.Egg = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies HashBrowns when HashBrowns is changed
+		/// </summary>
+		[Fact]
+		public void ChangingHashBrownsNotifiesHashBrownsProperty()
+		{
+			var entree = new SmokehouseSkeleton();
+			entree.HashBrowns = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "HashBrowns", () => { entree.HashBrowns = true; });
+			Assert.PropertyChanged(entree, "HashBrowns", () => { entree.HashBrowns = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Pancake when Pancake is changed
+		/// </summary>
+		[Fact]
+		public void ChangingPancakeNotifiesPancakeProperty()
+		{
+			var entree = new SmokehouseSkeleton();
+			entree.Pancake = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Pancake", () => { entree.Pancake = true; });
+			Assert.PropertyChanged(entree, "Pancake", () => { entree.Pancake = false; });
+		}
+
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>

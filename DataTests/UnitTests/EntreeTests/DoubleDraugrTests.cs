@@ -3,7 +3,7 @@
  * Class: DoubleDraugrTests.cs
  * Purpose: Test the DoubleDraugr.cs class in the Data library
  */
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Modified: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 
@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,123 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class DoubleDraugrTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new DoubleDraugr();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Bun when Bun is changed
+		/// </summary>
+		[Fact]
+		public void ChangingBunNotifiesBunProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Bun = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Bun", () => { entree.Bun = true; });
+			Assert.PropertyChanged(entree, "Bun", () => { entree.Bun = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Ketchup when Ketchup is changed
+		/// </summary>
+		[Fact]
+		public void ChangingKetchupNotifiesKetchupProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Ketchup = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Ketchup", () => { entree.Ketchup = true; });
+			Assert.PropertyChanged(entree, "Ketchup", () => { entree.Ketchup = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Mustard when Mustard is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMustardNotifiesMustardProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Mustard = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Mustard", () => { entree.Mustard = true; });
+			Assert.PropertyChanged(entree, "Mustard", () => { entree.Mustard = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Pickle when Pickle is changed
+		/// </summary>
+		[Fact]
+		public void ChangingPickleNotifiesPickleProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Pickle = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Pickle", () => { entree.Pickle = true; });
+			Assert.PropertyChanged(entree, "Pickle", () => { entree.Pickle = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Cheese when Cheese is changed
+		/// </summary>
+		[Fact]
+		public void ChangingCheeseNotifiesCheeseProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Cheese = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Cheese", () => { entree.Cheese = true; });
+			Assert.PropertyChanged(entree, "Cheese", () => { entree.Cheese = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Tomato when Tomato is changed
+		/// </summary>
+		[Fact]
+		public void ChangingTomatoNotifiesTomatoProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Tomato = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = true; });
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Lettuce when Lettuce is changed
+		/// </summary>
+		[Fact]
+		public void ChangingLettuceNotifiesLettuceProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Lettuce = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Lettuce", () => { entree.Lettuce = true; });
+			Assert.PropertyChanged(entree, "Lettuce", () => { entree.Lettuce = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Mayo when Mayo is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMayoNotifiesMayoProperty()
+		{
+			var entree = new DoubleDraugr();
+			entree.Mayo = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Mayo", () => { entree.Mayo = true; });
+			Assert.PropertyChanged(entree, "Mayo", () => { entree.Mayo = false; });
+		}
+
+
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>

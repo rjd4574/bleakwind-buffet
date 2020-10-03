@@ -16,12 +16,12 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for DragonbornWaffleFiresMenu.xaml
 	/// </summary>
-	public partial class FriedMiraakMenu : UserControl, IMenuItem
+	public partial class FriedMiraakMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current side under customization
 		/// </summary>
-		FriedMiraak _mySide = new FriedMiraak();
+		FriedMiraak _mySide;
 
 		/// <summary>
 		///		A list of all Size Radio buttons for easier navigation
@@ -30,19 +30,21 @@ namespace PointOfSale
 			new List<KeyValuePair<SideSize, RadioButton>>();
 
 		/// <summary>
-		///		Allows access to the current side being customized
+		///		Constructor. Creates a customization menu for the given side
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor for this menu. Initializes components and sets default values
-		/// </summary>
-		public FriedMiraakMenu()
+		/// <param name="side">The side to be customized</param>
+		public FriedMiraakMenu(IOrderItem side)
 		{
 			InitializeComponent();
+			_mySide = (FriedMiraak)side;
 			SetSizes();
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///		Constructor. Creates a cusomization menu for a new side
+		/// </summary>
+		public FriedMiraakMenu() : this(new FriedMiraak()) { }
 
 		/// <summary>
 		///		Sets all size radio buttons into a keyvalue pair for easier access
@@ -72,7 +74,7 @@ namespace PointOfSale
 		///		Update our drink with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized drink </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// Set the side of the side
 			foreach (KeyValuePair<SideSize, RadioButton> radio in _sizes)

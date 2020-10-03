@@ -1,9 +1,8 @@
 ﻿/*- ThalmorTripleMenu.cs				Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Allows customization of the Thalmore Triple
  */
-
 
 using System.Windows.Controls;
 using BleakwindBuffet.Data;
@@ -14,26 +13,29 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for DoubleDraugrMenu.xaml
 	/// </summary>
-	public partial class ThalmorTripleMenu : UserControl, IMenuItem
+	public partial class ThalmorTripleMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current entree under customization
 		/// </summary>
-		ThalmorTriple _myEntree = new ThalmorTriple();
+		ThalmorTriple _myEntree;
 
 		/// <summary>
-		///		Allows access to the current order being customized
+		///		Constructor, creates and initializes all componenets
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor, initilizes componenets and sets defaults
-		/// </summary>
-		public ThalmorTripleMenu()
+		/// <param name="entree"> The entree we are customizing </param>
+		public ThalmorTripleMenu(IOrderItem entree)
 		{
 			InitializeComponent();
+			_myEntree =(ThalmorTriple) entree;
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///		Constructor creates an initialiezes all compoenents.
+		///		Creates a new Entree
+		/// </summary>
+		public ThalmorTripleMenu() : this(new ThalmorTriple()) { }
 
 
 		/// <summary>
@@ -58,7 +60,7 @@ namespace PointOfSale
 		///		Update our entree with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized entree </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			_myEntree.Bun = uxBunCheck.IsChecked == true;
 			_myEntree.Ketchup = uxKetchupCheck.IsChecked == true;

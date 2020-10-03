@@ -6,7 +6,8 @@
 
 
 
-<UserControl x:Class="PointOfSale.FriedMiraakMenu"
+<local:CustomizationMenu
+			 x:Class="PointOfSale.FriedMiraakMenu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,6 +26,7 @@
 				<RowDefinition/>
 				<RowDefinition Height="3*"/>
 				<RowDefinition Height="12*"/>
+				<RowDefinition Height="2*"/>
 			</Grid.RowDefinitions>
 			<!-- Side Title -->
 			<DockPanel Grid.ColumnSpan="3">
@@ -42,6 +44,9 @@
 			<!-- Side Options -->
 			<DockPanel Grid.Row="2" Margin="5" LastChildFill="False">
 			</DockPanel>
+			<!-- Add Navigation Buttons -->
+			<Button Name="uxCancelOrderButton" Click="CancelOrderClick" Grid.Row="3">Cancel Order</Button>
+			<Button Name="uxPlaceOrderButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Place Order</Button>
 		</Grid>
 	</Grid>
-</UserControl>
+</local:CustomizationMenu>

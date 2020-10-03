@@ -1,12 +1,13 @@
 ﻿/*- AretinoAppleJuice.cs				Created: 26AUG20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 01OCT20
  *	Defines the Drink Aretino Apple Juice (Apple juice)
  */
 
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.Data.Drinks
 {
@@ -18,7 +19,19 @@ namespace BleakwindBuffet.Data.Drinks
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
-		public bool Ice { get; set; }
+		private bool _ice;	//private backing variable
+		public bool Ice 
+		{
+			get => _ice;
+			set
+			{
+				if( _ice != value )
+				{
+					_ice = value;
+					base.OnPropertyChanged(new PropertyChangedEventArgs("Ice"));
+				}
+			}
+		}
 
 		/// <summary>
 		///		Create a list of special instructions to be followed

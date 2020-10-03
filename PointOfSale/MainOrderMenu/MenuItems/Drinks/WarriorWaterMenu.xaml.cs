@@ -1,6 +1,6 @@
-﻿/*- WarriorWaterMenu.cs			Created: 26SEP20
+﻿/*- WarriorWaterMenu.cs					Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Allows customization of the Warrior water
  */
 
@@ -19,12 +19,12 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for AretinoAppleJuiceMenu.xaml
 	/// </summary>
-	public partial class WarriorWaterMenu : UserControl, IMenuItem
+	public partial class WarriorWaterMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current drink under customization
 		/// </summary>
-		WarriorWater _myDrink = new WarriorWater();
+		WarriorWater _myDrink;
 
 		/// <summary>
 		///		A list of all Size Radio buttons for easier navigation
@@ -33,19 +33,21 @@ namespace PointOfSale
 			new List<KeyValuePair<DrinkSize, RadioButton>>();
 
 		/// <summary>
-		///		Allows access to the current drink being customized
+		///		Constructor for this menu. Initialize all componenents with the supplied drink
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor for this menu. Initializes components and sets default values
-		/// </summary>
-		public WarriorWaterMenu()
+		/// <param name="drink">The drink to be customized</param>
+		public WarriorWaterMenu(IOrderItem drink)
 		{
 			InitializeComponent();
+			_myDrink = (WarriorWater)drink;
 			SetSizes();
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///  Constructor for this menu. Initialize all components with a new drink
+		/// </summary>
+		public WarriorWaterMenu() : this(new WarriorWater()) { }
 
 		/// <summary>
 		///		Sets all size radio buttons into a keyvalue pair for easier access
@@ -74,12 +76,11 @@ namespace PointOfSale
 			uxLemonCheck.IsChecked= _myDrink.Lemon;
 		}
 
-
 		/// <summary>
 		///		Update our drink with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized drink </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// Set the size of the drink
 			foreach (KeyValuePair<DrinkSize, RadioButton> radio in _sizes)

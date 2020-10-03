@@ -1,6 +1,6 @@
 ﻿/*- MainOrderMenu.cs					Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Defines the main order menu for the point of sale
  */
 
@@ -21,24 +21,16 @@ namespace PointOfSale
 	/// <summary>
 	///		Logic behind the point of sale's Main order menu
 	/// </summary>
-	public partial class MainOrderMenu : UserControl
+	public partial class MainOrderMenu :UserControl 
 	{
-		/// <summary>
-		///		Tax Rate
-		/// </summary>
-		private static double TAX = .10;
 		/// <summary>
 		///		The order menu screen where user can select a menu item
 		/// </summary>
-		private OrderMenu _menu = new OrderMenu();
+		private OrderMenu _mainMenu = new OrderMenu();
 		/// <summary>
-		///		Item menu used to customize selection
+		/// The order summery screen that keeps track of the items in the order thus far
 		/// </summary>
-		private IMenuItem _menuItem;
-		/// <summary>
-		///		Collection of all IOrderItems in the current order
-		/// </summary>
-		private List<IOrderItem> _orderedItems = new List<IOrderItem>();
+		private OrderSummary _orderSummary = new OrderSummary();
 
 		/// <summary>
 		///		Constructor. Set up and initialize all components in the point of sale
@@ -47,7 +39,8 @@ namespace PointOfSale
 		{
 			InitializeComponent();
 			ResetMenu();
-			UpdatePrice();
+			_mainMenu.CurrentMenuItem += OnMenuItemSelect;
+			_orderSummary.EditMenuItem += OnMenuItemSelect;
 		}
 
 		/// <summary>
@@ -55,113 +48,49 @@ namespace PointOfSale
 		/// </summary>
 		private void ResetMenu()
 		{
-			uxOrderMenuBorder.Child = _menu;
-			uxMenuBackButton.IsEnabled = false;
-			uxMenuNextButton.IsEnabled = true;
-			uxPlaceOrderButton.IsEnabled = false;
-			uxMenuAddOrderButton.IsEnabled = false;			
+			uxOrderMenuBorder.Child = _mainMenu;
+			uxOrderSummaryBorder.Child = _orderSummary;
 		}
 
 		/// <summary>
-		///		Allows customization of selected IOrderItem
+		///		Action to be taken when the user has made a selection indicating
+		///		that they want to customize a menu item. This typically happens on
+		///		a selection of a menu item, but can also be invoked through a request
+		///		to edit a previously ordered item
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void NextButtonClick(object sender, RoutedEventArgs e)
+		private void OnMenuItemSelect(object sender, MenuSelectEventArgs e)
 		{
-			// Activate the customization screen for the selection
-			ActivateCustomizationScreen(_menu.Selection);
-			// make sure the proper buttons are enabled/disabled
-			uxMenuAddOrderButton.IsEnabled = true;
-			uxMenuNextButton.IsEnabled = false;
-			uxMenuBackButton.IsEnabled = true;
+			e.GetMenu.CancelOrder += OnCancelOrder;
+			e.GetMenu.PlaceOrder += OnPlaceOrder;
+			uxOrderMenuBorder.Child = (UserControl)e.GetMenu;
 		}
 
 		/// <summary>
-		///		Allow the user to back out of its previous selction without
-		///		buying anything
+		///		Invoked when the user backs out of a customization window
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void BackButtonClick ( Object sender, RoutedEventArgs e)
+		private void OnCancelOrder(object sender, EventArgs e)
 		{
 			ResetMenu();
 		}
 
 		/// <summary>
-		///		Adds selected items with its customizations to the list
-		///		of ordered items for this transaction
+		///		Invoked when a user places an order. THis order can 
+		///		either be a new order, or an edit of a previously
+		///		ordered item.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void AddToOrderClick(object sender, RoutedEventArgs e)
+		private void OnPlaceOrder(object sender, EventArgs e)
 		{
-			_orderedItems.Add(_menuItem.Order);
-			uxOrderListView.Items.Add(_menuItem.Order.ToString());
-			UpdatePrice();
-			ResetMenu();
-		}
-
-		/// <summary>
-		///		Remove an item from the order list.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void RemoveOrderClick( object sender, RoutedEventArgs e)
-		{
-			_orderedItems.RemoveAt(uxOrderListView.SelectedIndex);
-			uxOrderListView.Items.RemoveAt(uxOrderListView.SelectedIndex);
-			UpdatePrice();
-		}
-
-		/// <summary>
-		///		This method can be called anytime there has been a change to the 
-		///		order. It will re-calculate the price and display it in your summery
-		/// </summary>
-		private void UpdatePrice()
-		{
-			double subtotal = 0;
-			foreach (IOrderItem item in _orderedItems)
-				subtotal += item.Price;
-			uxSubtotalBlock.Text = String.Format("Subtotal: ${0:0.00}", subtotal);
-			uxTaxBlock.Text = string.Format("Tax: ${0:0.00}", (subtotal*TAX));
-			uxGrandTotal.Text = string.Format("Grand Total: ${0:0.00}", (subtotal * (1+TAX)));
-		}
-
-		/// <summary>
-		///		Identifies the exact type of IOrderItem requested,
-		///		and brings up the customization screen for that item
-		/// </summary>
-		/// <param name="order"> the IOrderItem currently selected </param>
-		private void ActivateCustomizationScreen(IOrderItem order)
-		{
-			if (order is Entree)
+			if(sender is CustomizationMenu menuItem )
 			{
-				if (order is BriarheartBurger) _menuItem = new BriarheartBurgerMenu();
-				else if (order is DoubleDraugr) _menuItem = new DoubleDraugrMenu();
-				else if (order is GardenOrcOmelette) _menuItem = new GardenOrcOmeletteMenu();
-				else if (order is PhillyPoacher) _menuItem = new PhillyPoacherMenu();
-				else if (order is SmokehouseSkeleton) _menuItem = new SmokehouseSkeletonMenu();
-				else if (order is ThalmorTriple) _menuItem = new ThalmorTripleMenu();
-				else if (order is ThugsTBone) _menuItem = new ThugsTBoneMenu();
+				_orderSummary.AddItem(menuItem.Order);
+				ResetMenu();
 			}
-			else if ( order is Drink)
-			{
-				if (order is AretinoAppleJuice) _menuItem = new AretinoAppleJuiceMenu();
-				else if (order is CandlehearthCoffee) _menuItem = new CandlehearthCoffeeMenu();
-				else if (order is MarkarthMilk) _menuItem = new MarkarthMilkMenu();
-				else if (order is SailorSoda) _menuItem = new SailorSodaMenu();
-				else if (order is WarriorWater) _menuItem = new WarriorWaterMenu();
-			}
-			else if ( order is Side)
-			{
-				if (order is DragonbornWaffleFries) _menuItem = new DragonbornWaffleFriesMenu();
-				else if (order is FriedMiraak) _menuItem = new FriedMiraakMenu();
-				else if (order is MadOtarGrits) _menuItem = new MadOtarGritsMenu();
-				else if (order is VokunSalad) _menuItem = new VokunSaladMenu();
-			}
-
-			uxOrderMenuBorder.Child = (UserControl)_menuItem;
 		}
 	}
 }

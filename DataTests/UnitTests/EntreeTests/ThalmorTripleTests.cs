@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,147 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class ThalmorTripleTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new ThalmorTriple();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Bun when Bun is changed
+		/// </summary>
+		[Fact]
+		public void ChangingBunNotifiesBunProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Bun = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Bun", () => { entree.Bun = true; });
+			Assert.PropertyChanged(entree, "Bun", () => { entree.Bun = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Ketchup when Ketchup is changed
+		/// </summary>
+		[Fact]
+		public void ChangingKetchupNotifiesKetchupProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Ketchup = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Ketchup", () => { entree.Ketchup = true; });
+			Assert.PropertyChanged(entree, "Ketchup", () => { entree.Ketchup = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Mustard when Mustard is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMustardNotifiesMustardProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Mustard = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Mustard", () => { entree.Mustard = true; });
+			Assert.PropertyChanged(entree, "Mustard", () => { entree.Mustard = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Pickle when Pickle is changed
+		/// </summary>
+		[Fact]
+		public void ChangingPickleNotifiesPickleProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Pickle = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Pickle", () => { entree.Pickle = true; });
+			Assert.PropertyChanged(entree, "Pickle", () => { entree.Pickle = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Cheese when Cheese is changed
+		/// </summary>
+		[Fact]
+		public void ChangingCheeseNotifiesCheeseProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Cheese = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Cheese", () => { entree.Cheese = true; });
+			Assert.PropertyChanged(entree, "Cheese", () => { entree.Cheese = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Tomato when Tomato is changed
+		/// </summary>
+		[Fact]
+		public void ChangingTomatoNotifiesTomatoProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Tomato = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = true; });
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Lettuce when Lettuce is changed
+		/// </summary>
+		[Fact]
+		public void ChangingLettuceNotifiesLettuceProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Lettuce = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Lettuce", () => { entree.Lettuce = true; });
+			Assert.PropertyChanged(entree, "Lettuce", () => { entree.Lettuce = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Mayo when Mayo is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMayoNotifiesMayoProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Mayo = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Mayo", () => { entree.Mayo = true; });
+			Assert.PropertyChanged(entree, "Mayo", () => { entree.Mayo = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Bacon when Bacon is changed
+		/// </summary>
+		[Fact]
+		public void ChangingBaconNotifiesBaconProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Bacon = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Bacon", () => { entree.Bacon = true; });
+			Assert.PropertyChanged(entree, "Bacon", () => { entree.Bacon = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Egg when Egg is changed
+		/// </summary>
+		[Fact]
+		public void ChangingEggNotifiesEggProperty()
+		{
+			var entree = new ThalmorTriple();
+			entree.Egg = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Egg", () => { entree.Egg = true; });
+			Assert.PropertyChanged(entree, "Egg", () => { entree.Egg = false; });
+		}
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>

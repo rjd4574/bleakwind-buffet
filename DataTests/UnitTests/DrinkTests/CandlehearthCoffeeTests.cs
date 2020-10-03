@@ -13,6 +13,7 @@ using System;
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Drinks;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 {
@@ -21,6 +22,101 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 	/// </summary>
     public class CandlehearthCoffeeTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new CandlehearthCoffee();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies ice when ice is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingIceNotifiesIceProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.Ice = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = true; });
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies RoomForCream when room for cream property is changed
+		/// </summary>
+		[Fact]
+		public void ChangingRoomForCreamNotifiesRoomForCreamProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.RoomForCream = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "RoomForCream", () => { drink.RoomForCream = true; });
+			Assert.PropertyChanged(drink, "RoomForCream", () => { drink.RoomForCream = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies decaf when decaf property is changed
+		/// </summary>
+		[Fact]
+		public void ChangingDecafNotifiesDecafProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.Decaf = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Decaf", () => { drink.Decaf = true; });
+			Assert.PropertyChanged(drink, "Decaf", () => { drink.Decaf = false; });
+		}
+
+
+		/// <summary>
+		///		Ensure that this drink notifies size when size is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesSizeProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies price when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesPriceProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies Calories when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesCaloriesProperty()
+		{
+			var drink = new CandlehearthCoffee();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Small; });
+		}
+
 		/// <summary>
 		///		Ensure that this drink inherits from Drink
 		/// </summary>

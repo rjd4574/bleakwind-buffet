@@ -7,6 +7,7 @@
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.Data.Drinks
 {
@@ -18,17 +19,53 @@ namespace BleakwindBuffet.Data.Drinks
 		/// <summary>
 		///		Should the drink come with ice
 		/// </summary>
-		public bool Ice { get; set; }
+		private bool _ice;  //private backing variable
+		public bool Ice
+		{
+			get => _ice;
+			set
+			{
+				if (_ice != value)
+				{
+					_ice = value;
+					base.OnPropertyChanged(new PropertyChangedEventArgs("Ice"));
+				}
+			}
+		}
 
 		/// <summary>
 		///		Should the drink come with room for cream
 		/// </summary>
-		public bool RoomForCream { get; set; }
+		private bool _roomForCream;
+		public bool RoomForCream
+		{
+			get => _roomForCream;
+			set
+			{
+				if (_roomForCream != value)
+				{
+					_roomForCream = value;
+					base.OnPropertyChanged(new PropertyChangedEventArgs("RoomForCream"));
+				}
+			}
+		}
 
 		/// <summary>
 		///		Should the drink be Decaf
 		/// </summary>
-		public bool Decaf { get; set; }
+		private bool _decaf;	//private backing variable
+		public bool Decaf
+		{
+			get => _decaf;
+			set
+			{
+				if (_decaf != value)
+				{
+					_decaf = value;
+					base.OnPropertyChanged(new PropertyChangedEventArgs("Decaf"));
+				}
+			}
+		}
 
 		/// <summary>
 		///		Create a list of special instructions to be followed

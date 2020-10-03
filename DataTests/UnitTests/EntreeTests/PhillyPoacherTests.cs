@@ -3,7 +3,7 @@
  * Class: PhillyPoacherTests.cs
  * Purpose: Test the PhillyPoacher.cs class in the Data library
  */
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Modified: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 
@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,56 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class PhillyPoacherTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new PhillyPoacher();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Sirloin when Sirloin is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSirloinNotifiesSirloinProperty()
+		{
+			var entree = new PhillyPoacher();
+			entree.Sirloin = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Sirloin", () => { entree.Sirloin = true; });
+			Assert.PropertyChanged(entree, "Sirloin", () => { entree.Sirloin = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Onion when Onion is changed
+		/// </summary>
+		[Fact]
+		public void ChangingOnionNotifiesOnionProperty()
+		{
+			var entree = new PhillyPoacher();
+			entree.Onion = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Onion", () => { entree.Onion = true; });
+			Assert.PropertyChanged(entree, "Onion", () => { entree.Onion = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Roll when Roll is changed
+		/// </summary>
+		[Fact]
+		public void ChangingRollNotifiesRollProperty()
+		{
+			var entree = new PhillyPoacher();
+			entree.Roll = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Roll", () => { entree.Roll = true; });
+			Assert.PropertyChanged(entree, "Roll", () => { entree.Roll = false; });
+		}
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>

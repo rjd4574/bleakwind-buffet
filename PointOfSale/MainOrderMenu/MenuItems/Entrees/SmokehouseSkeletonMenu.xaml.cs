@@ -4,37 +4,38 @@
  *	Allows customization of the Smokehouse Skeleton
  */
 
-
 using System.Windows.Controls;
 using BleakwindBuffet.Data;
 using BleakwindBuffet.Data.Entrees;
-
 
 namespace PointOfSale
 {
 	/// <summary>
 	/// Interaction logic for GardenOrcOmeletteMenu.xaml
 	/// </summary>
-	public partial class SmokehouseSkeletonMenu : UserControl, IMenuItem
+	public partial class SmokehouseSkeletonMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current entree under customization
 		/// </summary>
-		SmokehouseSkeleton _myEntree = new SmokehouseSkeleton();
+		SmokehouseSkeleton _myEntree;
 
 		/// <summary>
-		///		Allows access to the current order being customized
+		///		Constructor, creates and initializes all componenets
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor, initilizes componenets and sets defaults
-		/// </summary>
-		public SmokehouseSkeletonMenu()
+		/// <param name="entree"> The entree we are customizing </param>
+		public SmokehouseSkeletonMenu(IOrderItem entree)
 		{
 			InitializeComponent();
+			_myEntree =(SmokehouseSkeleton) entree;
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///		Constructor creates an initialiezes all compoenents.
+		///		Creates a new Entree
+		/// </summary>
+		public SmokehouseSkeletonMenu() : this(new SmokehouseSkeleton()) { }
 
 		/// <summary>
 		///		Sets the check boxes to their defaults by accessing
@@ -52,7 +53,7 @@ namespace PointOfSale
 		///		Update our entree with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized entree </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			_myEntree.SausageLink = uxSausageLinkCheck.IsChecked == true;
 			_myEntree.Egg = uxEggCheck.IsChecked == true;

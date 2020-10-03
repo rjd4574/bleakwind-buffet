@@ -1,6 +1,6 @@
-﻿/*- ThugsTBoneMenu.cs				Created: 26SEP20
+﻿/*- ThugsTBoneMenu.cs					Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Allows customization of the Smokehouse Skeleton
  */
 
@@ -15,26 +15,29 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for GardenOrcOmeletteMenu.xaml
 	/// </summary>
-	public partial class ThugsTBoneMenu : UserControl, IMenuItem
+	public partial class ThugsTBoneMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current entree under customization
 		/// </summary>
-		ThugsTBone _myEntree = new ThugsTBone();
+		ThugsTBone _myEntree;
 
 		/// <summary>
-		///		Allows access to the current order being customized
+		///		Constructor, creates and initializes all componenets
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor, initilizes componenets and sets defaults
-		/// </summary>
-		public ThugsTBoneMenu()
+		/// <param name="entree"> The entree we are customizing </param>
+		public ThugsTBoneMenu(IOrderItem entree)
 		{
 			InitializeComponent();
+			_myEntree =(ThugsTBone) entree;
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///		Constructor creates an initialiezes all compoenents.
+		///		Creates a new Entree
+		/// </summary>
+		public ThugsTBoneMenu() : this(new ThugsTBone()) { }
 
 		/// <summary>
 		///		Sets the check boxes to their defaults by accessing
@@ -49,7 +52,7 @@ namespace PointOfSale
 		///		Update our entree with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized entree </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// No options
 			return _myEntree;

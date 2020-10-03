@@ -1,20 +1,26 @@
 ﻿/*- Drink.cs							Created: 09SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Defines the common proprerties of a Drink
  */
 
 using BleakwindBuffet.Data.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.Data.Drinks
 {
 	/// <summary>
 	///		A base class representing the common properties of a Drink
 	/// </summary>
-	public abstract class Drink : IOrderItem
+	public abstract class Drink : IOrderItem, INotifyPropertyChanged
 	{
+		/// <summary>
+		///		Allows all drinks to be notified of a change
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>
 		///		Protected backing variable for the name of the drink
 		/// </summary>
@@ -36,9 +42,23 @@ namespace BleakwindBuffet.Data.Drinks
 		public Size Size
 		{
 			get => _size;
-			set =>      // Only set the size if the value is valid!
-				_size = (Enum.IsDefined(typeof(Size), value)) ? value :
+			set
+			{   // Only set the size if the value is valid!
+				if (!(Enum.IsDefined(typeof(Size), value)))
 					throw new NotImplementedException("Size is Not Defined");
+				if (_size != value)
+				{
+					double price = Price;
+					uint calories = Calories;
+					_size = value;
+					OnPropertyChanged(new PropertyChangedEventArgs("Size"));
+					// Determine if the price/calories have changed with the size
+					if( price != Price )
+						OnPropertyChanged(new PropertyChangedEventArgs("Price"));
+					if( calories != Calories )
+						OnPropertyChanged(new PropertyChangedEventArgs("Calories"));
+				}
+			}
 		}
 
 		/// <summary>
@@ -58,6 +78,15 @@ namespace BleakwindBuffet.Data.Drinks
 		///		it should override this method
 		/// </summary>
 		public virtual List<string> SpecialInstructions => new List<string>();
+
+		/// <summary>
+		///		Allow children of the drink class to invoke propertychaned events
+		/// </summary>
+		/// <param name="e">The property that was changed in an inherted class</param>
+		protected void OnPropertyChanged(PropertyChangedEventArgs e)
+		{
+			PropertyChanged?.Invoke(this, e);
+		}
 
 		/// <summary>
 		///		All Drinks must be able to represent themselves using a valid ToString. 

@@ -5,7 +5,8 @@
  -->
 
 
-<UserControl x:Class="PointOfSale.ThugsTBoneMenu"
+<local:CustomizationMenu
+			 x:Class="PointOfSale.ThugsTBoneMenu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,6 +23,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition/>
 			<RowDefinition Height="12*"/>
+			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
 		<!-- Entree Title -->
 		<DockPanel Grid.ColumnSpan="3">
@@ -32,6 +34,8 @@
 		<!-- Entree Options -->
 		<DockPanel Grid.Row="1" Margin="5" LastChildFill="False">
 		</DockPanel>
-
+		<!-- Add Navigation Buttons -->
+		<Button Name="uxCancelOrderButton" Click="CancelOrderClick" Grid.Row="3">Cancel Order</Button>
+		<Button Name="uxPlaceOrderButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Place Order</Button>
 	</Grid>
-</UserControl>
+</local:CustomizationMenu>

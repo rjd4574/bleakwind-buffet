@@ -35,56 +35,19 @@
 		<Border Name="RightEdgeBorder" Background="Coral" Grid.Column="4" Grid.RowSpan="4"/>
 		<Border Name="SeperatorBorder" Background="Coral" Grid.Column="2" Grid.RowSpan="4"/>
 		<!-- Add in the Menu -->
-		<Border Name="uxOrderMenuBorder" Background="Aquamarine" Grid.Column="1" Grid.Row="1"/>
-		<!-- Add Reciept/Order Details -->
-		<DockPanel Name="OrderDetailsPanel" Grid.Column="3" Grid.Row="1" Margin="5" LastChildFill="False">
-			<TextBlock Name ="uxOrderNumberBlock" DockPanel.Dock="Top" FontWeight="Bold" TextAlignment="Center">
-				Order Number:
-			</TextBlock>
-			<ListView Name="uxOrderListView" BorderThickness="0"  DockPanel.Dock="Top"/>
-			<TextBlock Name ="uxTaxBlock" DockPanel.Dock="Bottom" TextAlignment="Right">
-				Tax:
-			</TextBlock>
-			<TextBlock Name ="uxSubtotalBlock" DockPanel.Dock="Bottom" TextAlignment="Right">
-				SubTotal:
-			</TextBlock>
-			<Button Name="uxRemoveItemButton" Click="RemoveOrderClick" DockPanel.Dock="Bottom">
-				Remove Item
-			</Button>
-		</DockPanel>
-		<!-- Grand Total -->
-		<TextBlock Name ="uxGrandTotal" DockPanel.Dock="Bottom" TextAlignment="Right" FontWeight="Bold"
-				   FontSize="15" Margin ="5" Grid.Column="3" Grid.Row="2">
-				Grand Total:
-		</TextBlock>
-		<!-- ORDER BUTTON BORDER -->
-		<Border Name ="uxButtonBorder" Grid.Column="1" Grid.Row="2" Background="Black">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<!-- Back Button -->
-				<Button Name ="uxMenuBackButton" Click="BackButtonClick">
-					&lt;&lt; Back
-				</Button>
-				<!-- Next Button -->
-				<Button Name ="uxMenuNextButton" Click="NextButtonClick" Grid.Column="1">
-					Next &gt;&gt;
-				</Button>
-				<!-- Add Order Button -->
-				<Button Name ="uxMenuAddOrderButton" Click = "AddToOrderClick"  Grid.Column ="5">
-					Add to Order &gt;&gt;
-				</Button>
-				<!-- Place Order Button -->
-				<Button Name="uxPlaceOrderButton" Grid.Column="3">
-					Place Order
-				</Button>
-			</Grid>
+		<Border Name="uxOrderMenuBorder" Background="Aquamarine" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+			<Border.Resources>
+				<Style x:Key="uxNavButtons" TargetType="Control">
+					<Setter Property="Background" Value="DarkBlue"/>
+					<Setter Property="Foreground" Value="Yellow"/>
+					<Setter Property="FontSize" Value="20"/>
+					<Setter Property="Margin" Value="40,10"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+				</Style>
+				<Style TargetType="Button" BasedOn="{StaticResource uxNavButtons}"/>
+			</Border.Resources>
 		</Border>
+		<!-- Add Reciept/Order Details -->
+		<Border Name ="uxOrderSummaryBorder" Background="White" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
 	</Grid>
 </UserControl>

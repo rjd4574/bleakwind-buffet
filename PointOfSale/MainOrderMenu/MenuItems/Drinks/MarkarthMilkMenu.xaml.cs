@@ -1,6 +1,6 @@
 ﻿/*- MarkarthMilkMenu.cs				Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Allows customization of the Markarth Milk
  */
 
@@ -19,12 +19,12 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for AretinoAppleJuiceMenu.xaml
 	/// </summary>
-	public partial class MarkarthMilkMenu : UserControl, IMenuItem
+	public partial class MarkarthMilkMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current drink under customization
 		/// </summary>
-		MarkarthMilk _myDrink = new MarkarthMilk();
+		MarkarthMilk _myDrink;
 
 		/// <summary>
 		///		A list of all Size Radio buttons for easier navigation
@@ -33,19 +33,21 @@ namespace PointOfSale
 			new List<KeyValuePair<DrinkSize, RadioButton>>();
 
 		/// <summary>
-		///		Allows access to the current drink being customized
+		///		Constructor for this menu. Initialize all componenents with the supplied drink
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor for this menu. Initializes components and sets default values
-		/// </summary>
-		public MarkarthMilkMenu()
+		/// <param name="drink">The drink to be customized</param>
+		public MarkarthMilkMenu(IOrderItem drink)
 		{
 			InitializeComponent();
+			_myDrink = (MarkarthMilk)drink;
 			SetSizes();
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///  Constructor for this menu. Initialize all components with a new drink
+		/// </summary>
+		public MarkarthMilkMenu() : this(new MarkarthMilk()) { }
 
 		/// <summary>
 		///		Sets all size radio buttons into a keyvalue pair for easier access
@@ -73,12 +75,11 @@ namespace PointOfSale
 			uxIceCheck.IsChecked = _myDrink.Ice;
 		}
 
-
 		/// <summary>
 		///		Update our drink with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized drink </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// Set the size of the drink
 			foreach (KeyValuePair<DrinkSize, RadioButton> radio in _sizes)

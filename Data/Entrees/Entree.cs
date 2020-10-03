@@ -1,19 +1,25 @@
 ﻿/*- Entree.cs							Created: 09SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 01OCT20
  *	Defines the common proprerties of an Entree
  */
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.Data.Entrees
 {
 	/// <summary>
 	///		A base class representing the common properties of an Entree
 	/// </summary>
-	public abstract class Entree : IOrderItem
+	public abstract class Entree : IOrderItem, INotifyPropertyChanged
 	{
+		/// <summary>
+		///		Allows all Entree's to be informed of a property change
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>
 		///		Protected backing variable for the name of the Entree
 		/// </summary>
@@ -41,6 +47,15 @@ namespace BleakwindBuffet.Data.Entrees
 		///		it should override this method
 		/// </summary>
 		public virtual List<string> SpecialInstructions => new List<string>();
+
+		/// <summary>
+		///		Allow children of the entree class to invoke propertychaned events
+		/// </summary>
+		/// <param name="e">The property that was changed in an inherted class</param>
+		protected void OnPropertyChange(PropertyChangedEventArgs e)
+		{
+			PropertyChanged?.Invoke(this, e);
+		}
 
 		/// <summary>
 		///		All Entrees must be able to represent themselves using a valid ToString 

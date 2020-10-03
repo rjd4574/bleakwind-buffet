@@ -1,6 +1,6 @@
 ﻿/*- SailorSodaMenu.cs					Created: 26SEP20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 02OCT20
  *	Allows customization of the SailorSoda
  */
 
@@ -20,7 +20,7 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for AretinoAppleJuiceMenu.xaml
 	/// </summary>
-	public partial class SailorSodaMenu : UserControl, IMenuItem
+	public partial class SailorSodaMenu : CustomizationMenu	
 	{
 		/// <summary>
 		///		The current drink under customization
@@ -40,20 +40,22 @@ namespace PointOfSale
 			new List<KeyValuePair<SodaFlavor, RadioButton>>();
 
 		/// <summary>
-		///		Allows access to the current drink being customized
+		///		Constructor for this menu. Initialize all componenents with the supplied drink
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor for this menu. Initializes components and sets default values
-		/// </summary>
-		public SailorSodaMenu()
+		/// <param name="drink">The drink to be customized</param>
+		public SailorSodaMenu(IOrderItem drink)
 		{
 			InitializeComponent();
+			_myDrink = (SailorSoda)drink;
 			SetSizes();
 			SetFlavors();
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///  Constructor for this menu. Initialize all components with a new drink
+		/// </summary>
+		public SailorSodaMenu() : this(new SailorSoda()) { }
 
 		/// <summary>
 		///		Sets all size radio buttons into a keyvalue pair for easier access
@@ -101,12 +103,11 @@ namespace PointOfSale
 			uxIceCheck.IsChecked = _myDrink.Ice;
 		}
 
-
 		/// <summary>
 		///		Update our drink with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized drink </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// Set the size of the drink
 			foreach (KeyValuePair<DrinkSize, RadioButton> radio in _sizes)

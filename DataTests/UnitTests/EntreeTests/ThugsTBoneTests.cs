@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,17 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class ThugsTBoneTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new ThugsTBone();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>

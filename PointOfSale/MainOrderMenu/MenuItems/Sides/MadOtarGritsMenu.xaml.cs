@@ -4,7 +4,6 @@
  *	Allows customization of the Mad Otar Grits
  */
 
-
 using BleakwindBuffet.Data.Sides;
 using BleakwindBuffet.Data;
 using System.Collections.Generic;
@@ -16,12 +15,12 @@ namespace PointOfSale
 	/// <summary>
 	/// Interaction logic for DragonbornWaffleFiresMenu.xaml
 	/// </summary>
-	public partial class MadOtarGritsMenu : UserControl, IMenuItem
+	public partial class MadOtarGritsMenu : CustomizationMenu
 	{
 		/// <summary>
 		///		The current side under customization
 		/// </summary>
-		MadOtarGrits _mySide = new MadOtarGrits();
+		MadOtarGrits _mySide;
 
 		/// <summary>
 		///		A list of all Size Radio buttons for easier navigation
@@ -30,19 +29,21 @@ namespace PointOfSale
 			new List<KeyValuePair<SideSize, RadioButton>>();
 
 		/// <summary>
-		///		Allows access to the current side being customized
+		///		Constructor. Creates a customization menu for the given side
 		/// </summary>
-		public IOrderItem Order => GetOrder();
-
-		/// <summary>
-		///		Constructor for this menu. Initializes components and sets default values
-		/// </summary>
-		public MadOtarGritsMenu()
+		/// <param name="side">The side to be customized</param>
+		public MadOtarGritsMenu(IOrderItem side)
 		{
 			InitializeComponent();
+			_mySide = (MadOtarGrits)side;
 			SetSizes();
 			SetCheckBoxes();
 		}
+
+		/// <summary>
+		///		Constructor. Creates a cusomization menu for a new side
+		/// </summary>
+		public MadOtarGritsMenu() : this(new MadOtarGrits()) { }
 
 		/// <summary>
 		///		Sets all size radio buttons into a keyvalue pair for easier access
@@ -72,7 +73,7 @@ namespace PointOfSale
 		///		Update our side with the selected customizations and return it
 		/// </summary>
 		/// <returns> The requested customized drink </returns>
-		public IOrderItem GetOrder()
+		protected override IOrderItem GetOrder()
 		{
 			// Set the size of the side
 			foreach (KeyValuePair<SideSize, RadioButton> radio in _sizes)

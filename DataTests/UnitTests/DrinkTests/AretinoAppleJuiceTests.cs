@@ -4,7 +4,7 @@
  * Purpose: Test the AretinoAppleJuice.cs class in the Data library
  */
 
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Edited: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 using Xunit;
@@ -13,6 +13,7 @@ using System;
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Drinks;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 {
@@ -21,6 +22,74 @@ namespace BleakwindBuffet.DataTests.UnitTests.DrinkTests
 	/// </summary>
     public class AretinoAppleJuiceTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new AretinoAppleJuice();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies ice when ice is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingIceNotifiesIceProperty()
+		{
+			var drink = new AretinoAppleJuice();
+			drink.Ice = false;	// notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = true; });
+			Assert.PropertyChanged(drink, "Ice", () => { drink.Ice = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies size when size is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesSizeProperty()
+		{
+			var drink = new AretinoAppleJuice();
+			drink.Size = Size.Small;		// Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Size", () => { drink.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies price when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesPriceProperty()
+		{
+			var drink = new AretinoAppleJuice();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Price", () => { drink.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this drink notifies Calories when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesCaloriesProperty()
+		{
+			var drink = new AretinoAppleJuice();
+			drink.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Large; });
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Medium; });
+			Assert.PropertyChanged(drink, "Calories", () => { drink.Size = Size.Small; });
+		}
+
 		/// <summary>
 		///		Ensure that this drink inherits from Drink
 		/// </summary>

@@ -3,7 +3,7 @@
  * Class: MadOtarGritsTests.cs
  * Purpose: Test the MadOtarGrits.cs class in the Data library
  */
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Modified: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 using Xunit;
@@ -12,6 +12,7 @@ using System;
 using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Sides;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 {
@@ -20,6 +21,60 @@ namespace BleakwindBuffet.DataTests.UnitTests.SideTests
 	/// </summary>
 	public class MadOtarGritsTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new MadOtarGrits();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this side notifies size when size is changed
+		///		Property
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesSizeProperty()
+		{
+			var side = new MadOtarGrits();
+			side.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(side, "Size", () => { side.Size = Size.Large; });
+			Assert.PropertyChanged(side, "Size", () => { side.Size = Size.Medium; });
+			Assert.PropertyChanged(side, "Size", () => { side.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this side notifies price when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesPriceProperty()
+		{
+			var side = new MadOtarGrits();
+			side.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(side, "Price", () => { side.Size = Size.Large; });
+			Assert.PropertyChanged(side, "Price", () => { side.Size = Size.Medium; });
+			Assert.PropertyChanged(side, "Price", () => { side.Size = Size.Small; });
+		}
+
+		/// <summary>
+		///		Ensure that this side notifies Calories when size is changed
+		/// </summary>
+		[Fact]
+		public void ChangingSizeNotifiesCaloriesProperty()
+		{
+			var side = new MadOtarGrits();
+			side.Size = Size.Small;        // Notify will only work when property is changed
+
+			Assert.PropertyChanged(side, "Calories", () => { side.Size = Size.Large; });
+			Assert.PropertyChanged(side, "Calories", () => { side.Size = Size.Medium; });
+			Assert.PropertyChanged(side, "Calories", () => { side.Size = Size.Small; });
+		}
+
 		/// <summary>
 		///		Ensure that this side inherits from Side
 		/// </summary>

@@ -1,12 +1,13 @@
 ﻿/*- ThalmorTriple.cs					Created: 26AUG20
  * Author: Ryan Dentremont				CIS 400 MWF @ 1330
- * 
+ *										Last Modified: 01OCT20
  *	Defines the Entree Thalmor Triple (A 1 lb Burger)
  */
 
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.Data.Entrees
 {
@@ -16,54 +17,204 @@ namespace BleakwindBuffet.Data.Entrees
 	public class ThalmorTriple : Entree
 	{
 		/// <summary>
-		///		Should the burger have a bun
+		///		Private backing variable for Bun
 		/// </summary>
-		public bool Bun { get; set; }
+		private bool _bun;
+		/// <summary>
+		///		Indicates if a bun is included in this order
+		/// </summary>
+		public bool Bun
+		{
+			get => _bun;
+			set
+			{
+				if (_bun != value)
+				{
+					_bun = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Bun"));
+				}
+			}
+		}
 
 		/// <summary>
-		///		Should there be ketchup on the burger
+		///		Private backing variable for Ketchup
 		/// </summary>
-		public bool Ketchup { get; set; }
+		private bool _ketchup;
+		/// <summary>
+		///		Indicates if Ketchup is included in this order
+		/// </summary>
+		public bool Ketchup
+		{
+			get => _ketchup;
+			set
+			{
+				if (_ketchup != value)
+				{
+					_ketchup = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Ketchup"));
+				}
+			}
+		}
 
 		/// <summary>
-		///		Should there be mustard on the burger
+		///		Private backing variable for Mustard
 		/// </summary>
-		public bool Mustard { get; set; }
+		private bool _mustard;
+		/// <summary>
+		///		Indicates if Mustard is included in this order
+		/// </summary>
+		public bool Mustard
+		{
+			get => _mustard;
+			set
+			{
+				if (_mustard != value)
+				{
+					_mustard = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Mustard"));
+				}
+			}
+		}
 
+		/// <summary>
+		///		Private backing variable for Pickle
+		/// </summary>
+		private bool _pickle;
 		/// <summary>
 		///		Should there be pickle on the burger
 		/// </summary>
-		public bool Pickle { get; set; }
+		public bool Pickle
+		{
+			get => _pickle;
+			set
+			{
+				if (_pickle != value)
+				{
+					_pickle = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Pickle"));
+				}
+			}
+		}
 
+		/// <summary>
+		///		Private backing variable for Cheese
+		/// </summary>
+		private bool _cheese;
 		/// <summary>
 		///		Should there be cheese on the burger
 		/// </summary>
-		public bool Cheese { get; set; }
+		public bool Cheese
+		{
+			get => _cheese;
+			set
+			{
+				if (_cheese != value)
+				{
+					_cheese = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Cheese"));
+				}
+			}
+		}
 
+		/// <summary>
+		///		Private backing variable for Tomato
+		/// </summary>
+		private bool _tomato;
 		/// <summary>
 		///		Should there be Tomato on the burger
 		/// </summary>
-		public bool Tomato { get; set; }
+		public bool Tomato
+		{
+			get => _tomato;
+			set
+			{
+				if (_tomato != value)
+				{
+					_tomato = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Tomato"));
+				}
+			}
+		}
 
+		/// <summary>
+		///		Private backing variable for Lettuce
+		/// </summary>
+		private bool _lettuce;
 		/// <summary>
 		///		Should there be Lettuce on the burger
 		/// </summary>
-		public bool Lettuce { get; set; }
+		public bool Lettuce
+		{
+			get => _lettuce;
+			set
+			{
+				if (_lettuce != value)
+				{
+					_lettuce = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Lettuce"));
+				}
+			}
+		}
 
+		/// <summary>
+		///		Private backing variable for Mayo
+		/// </summary>
+		private bool _mayo;
 		/// <summary>
 		///		Should there be Mayo on the burger
 		/// </summary>
-		public bool Mayo { get; set; }
+		public bool Mayo
+		{
+			get => _mayo;
+			set
+			{
+				if (_mayo != value)
+				{
+					_mayo = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Mayo"));
+				}
+			}
+		}
 
+		/// <summary>
+		/// private backing variable for Bacon
+		/// </summary>
+		private bool _bacon;
 		/// <summary>
 		///		Should there be Bacon on the burger
 		/// </summary>
-		public bool Bacon { get; set; }
+		public bool Bacon
+		{
+			get => _bacon;
+			set
+			{
+				if (_bacon != value)
+				{
+					_bacon = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Bacon"));
+				}
+			}
+		}
 
+		/// <summary>
+		/// private backing variable for Egg
+		/// </summary>
+		private bool _egg;
 		/// <summary>
 		///		Should there be Egg on the burger
 		/// </summary>
-		public bool Egg { get; set; }
+		public bool Egg
+		{
+			get => _egg;
+			set
+			{
+				if (_egg != value)
+				{
+					_egg = value;
+					base.OnPropertyChange(new PropertyChangedEventArgs("Egg"));
+				}
+			}
+		}
 
 		/// <summary>
 		///		Create a list of special instructions to be followed

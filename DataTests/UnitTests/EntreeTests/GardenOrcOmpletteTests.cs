@@ -3,7 +3,7 @@
  * Class: GardenOrcOmeletteTests.cs
  * Purpose: Test the GardenOrcOmelette.cs class in the Data library
  */
-/*- Edited by: Ryan Dentremont				Edited: 03SEP20
+/*- Edited by: Ryan Dentremont				Last Modified: 01OCT20
  * 											CIS 400 MWF @ 1330
  */
 
@@ -12,6 +12,7 @@ using Xunit;
 // Using the exact namespaces requited to ensure no typo's
 using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data;
+using System.ComponentModel;
 
 namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 {
@@ -20,6 +21,69 @@ namespace BleakwindBuffet.DataTests.UnitTests.EntreeTests
 	/// </summary>
 	public class GardenOrcOmeletteTests
     {
+		/// <summary>
+		///		Ensure this IOrderItem is implimenting the required
+		///		INotifyPropertyChanged Interface
+		/// </summary>
+		[Fact]
+		public void ShouldImplimentINotify()
+		{
+			var orderItem = new GardenOrcOmelette();
+			Assert.IsAssignableFrom<INotifyPropertyChanged>(orderItem);
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Broccoli when Broccoli is changed
+		/// </summary>
+		[Fact]
+		public void ChangingBroccolinNotifiesBroccoliProperty()
+		{
+			var entree = new GardenOrcOmelette();
+			entree.Broccoli = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Broccoli", () => { entree.Broccoli = true; });
+			Assert.PropertyChanged(entree, "Broccoli", () => { entree.Broccoli = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Mushrooms when Mushrooms is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMushroomsNotifiesMushroomsProperty()
+		{
+			var entree = new GardenOrcOmelette();
+			entree.Mushrooms = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Mushrooms", () => { entree.Mushrooms = true; });
+			Assert.PropertyChanged(entree, "Mushrooms", () => { entree.Mushrooms = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Tomato when Tomato is changed
+		/// </summary>
+		[Fact]
+		public void ChangingMustardNotifiesMustardProperty()
+		{
+			var entree = new GardenOrcOmelette();
+			entree.Tomato = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = true; });
+			Assert.PropertyChanged(entree, "Tomato", () => { entree.Tomato = false; });
+		}
+
+		/// <summary>
+		///		Ensure that this Entree notifies Cheddar when Cheddar is changed
+		/// </summary>
+		[Fact]
+		public void ChangingCheddarNotifiesCheddarProperty()
+		{
+			var entree = new GardenOrcOmelette();
+			entree.Cheddar = false;  // notify will only work when property is changed
+
+			Assert.PropertyChanged(entree, "Cheddar", () => { entree.Cheddar = true; });
+			Assert.PropertyChanged(entree, "Cheddar", () => { entree.Cheddar = false; });
+		}
+
 		/// <summary>
 		///		Ensure that this entree inherits from Entree
 		/// </summary>
