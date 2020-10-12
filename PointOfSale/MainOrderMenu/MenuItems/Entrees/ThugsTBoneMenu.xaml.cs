@@ -18,45 +18,12 @@ namespace PointOfSale
 	public partial class ThugsTBoneMenu : CustomizationMenu
 	{
 		/// <summary>
-		///		The current entree under customization
-		/// </summary>
-		ThugsTBone _myEntree;
-
-		/// <summary>
 		///		Constructor, creates and initializes all componenets
 		/// </summary>
 		/// <param name="entree"> The entree we are customizing </param>
-		public ThugsTBoneMenu(IOrderItem entree)
+		public ThugsTBoneMenu()
 		{
 			InitializeComponent();
-			_myEntree =(ThugsTBone) entree;
-			SetCheckBoxes();
 		}
-
-		/// <summary>
-		///		Constructor creates an initialiezes all compoenents.
-		///		Creates a new Entree
-		/// </summary>
-		public ThugsTBoneMenu() : this(new ThugsTBone()) { }
-
-		/// <summary>
-		///		Sets the check boxes to their defaults by accessing
-		///		the current entree right after initialization
-		/// </summary>
-		private void SetCheckBoxes()
-		{
-			// No options
-		}
-
-		/// <summary>
-		///		Update our entree with the selected customizations and return it
-		/// </summary>
-		/// <returns> The requested customized entree </returns>
-		protected override IOrderItem GetOrder()
-		{
-			// No options
-			return _myEntree;
-		}
-
 	}
 }

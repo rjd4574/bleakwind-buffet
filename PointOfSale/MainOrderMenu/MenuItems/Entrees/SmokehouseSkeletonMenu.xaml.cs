@@ -16,52 +16,12 @@ namespace PointOfSale
 	public partial class SmokehouseSkeletonMenu : CustomizationMenu
 	{
 		/// <summary>
-		///		The current entree under customization
-		/// </summary>
-		SmokehouseSkeleton _myEntree;
-
-		/// <summary>
 		///		Constructor, creates and initializes all componenets
 		/// </summary>
 		/// <param name="entree"> The entree we are customizing </param>
-		public SmokehouseSkeletonMenu(IOrderItem entree)
+		public SmokehouseSkeletonMenu()
 		{
 			InitializeComponent();
-			_myEntree =(SmokehouseSkeleton) entree;
-			SetCheckBoxes();
 		}
-
-		/// <summary>
-		///		Constructor creates an initialiezes all compoenents.
-		///		Creates a new Entree
-		/// </summary>
-		public SmokehouseSkeletonMenu() : this(new SmokehouseSkeleton()) { }
-
-		/// <summary>
-		///		Sets the check boxes to their defaults by accessing
-		///		the current entree right after initialization
-		/// </summary>
-		private void SetCheckBoxes()
-		{
-			uxSausageLinkCheck.IsChecked = _myEntree.SausageLink;
-			uxEggCheck.IsChecked = _myEntree.Egg;
-			uxHashBorwnsCheck.IsChecked = _myEntree.HashBrowns;
-			uxPancakeCheck.IsChecked = _myEntree.Pancake;
-		}
-
-		/// <summary>
-		///		Update our entree with the selected customizations and return it
-		/// </summary>
-		/// <returns> The requested customized entree </returns>
-		protected override IOrderItem GetOrder()
-		{
-			_myEntree.SausageLink = uxSausageLinkCheck.IsChecked == true;
-			_myEntree.Egg = uxEggCheck.IsChecked == true;
-			_myEntree.HashBrowns = uxHashBorwnsCheck.IsChecked == true; ;
-			_myEntree.Pancake = uxPancakeCheck.IsChecked == true;
-
-			return _myEntree;
-		}
-
 	}
 }

@@ -86,7 +86,29 @@ namespace BleakwindBuffet.Data.Drinks
 		protected void OnPropertyChanged(PropertyChangedEventArgs e)
 		{
 			PropertyChanged?.Invoke(this, e);
+			switch(e.PropertyName)
+			{
+				case "Price": break;
+				case "Calories": break;
+				case "Size":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("String"));
+					break;
+				case "Decaf":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("String"));
+					break;
+				case "Flavor":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("String"));
+					break;
+				default: 
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SpecialInstructions"));
+					break;
+			}
 		}
+
+		/// <summary>
+		/// Property that can be notified when the ToString has changed
+		/// </summary>
+		public string String => ToString();
 
 		/// <summary>
 		///		All Drinks must be able to represent themselves using a valid ToString. 

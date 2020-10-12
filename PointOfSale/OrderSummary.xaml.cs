@@ -8,6 +8,7 @@
 using BleakwindBuffet.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,11 @@ namespace PointOfSale
 		private List<IOrderItem> _reciept = new List<IOrderItem>();
 
 		/// <summary>
+		/// represents this order and the dataconext of this order
+		/// </summary>
+		private Order _myOrder;
+
+		/// <summary>
 		///		Tax Rate
 		/// </summary>
 		private static double TAX = .10;
@@ -44,24 +50,28 @@ namespace PointOfSale
 		/// <summary>
 		///		Constructor. Initializes the order summary
 		/// </summary>
-		public OrderSummary()
+		public OrderSummary(Order myOrder)
 		{
 			InitializeComponent();
-			UpdatePrice();
+			DataContext = myOrder;
+			_myOrder = myOrder;
+			_myOrder.CollectionChanged += UpdateOrderListener;
 		}
 
-		/// <summary>
-		///		Update the price of the order. This can be called any time there
-		///		is a change to the list
-		/// </summary>
-		private void UpdatePrice()
+		public void UpdateOrderListener(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			double subtotal = 0;
-			foreach (IOrderItem item in _reciept)
-				subtotal += item.Price;
-			uxSubTotal.Text = String.Format("Subtotal: ${0:0.00}", subtotal);
-			uxTax.Text = string.Format("Tax: ${0:0.00}", (subtotal * TAX));
-			uxTotal.Text = string.Format("Grand Total: ${0:0.00}", (subtotal * (1 + TAX)));
+			switch(e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					foreach (IOrderItem item in e.NewItems)
+						AddSummary(item);
+					break;
+			}
+		}
+		
+		public void AddSummary(IOrderItem item)
+		{
+			//uxList
 		}
 
 		/// <summary>
@@ -71,19 +81,8 @@ namespace PointOfSale
 		/// <param name="item">item to be added into the list</param>
 		public void AddItem(IOrderItem item )
 		{
-			// if the reciept still contains an instance of this item, then
-			// the item needs to be updated.
-			if (_reciept.Contains(item))
-				uxOrderList.Items[_reciept.IndexOf(item)] = item.ToString();
-			// Otherwise add it to both lists
-			else
-			{
-				_reciept.Add(item);
-				uxOrderList.Items.Add(item.ToString());
-			}	
-			UpdatePrice();
+			_myOrder.Add(item);
 		}
-
 
 		/// <summary>
 		///		Removes the selected item from the order lists
@@ -94,9 +93,7 @@ namespace PointOfSale
 		{
 			if (uxOrderList.SelectedItems.Count > 0)
 			{
-				_reciept.RemoveAt(uxOrderList.SelectedIndex);
-				uxOrderList.Items.RemoveAt(uxOrderList.SelectedIndex);
-				UpdatePrice();
+				_myOrder.Remove((IOrderItem)uxOrderList.SelectedItem);
 			}
 		}
 
@@ -110,8 +107,9 @@ namespace PointOfSale
 		{
 			if(uxOrderList.SelectedItems.Count > 0)
 			{
-				EditMenuItem?.Invoke(this, new MenuSelectEventArgs(_reciept[uxOrderList.SelectedIndex]));
+				EditMenuItem?.Invoke(this, new MenuSelectEventArgs((IOrderItem)uxOrderList.SelectedItem));
 			}
 		}
+
 	}
 }

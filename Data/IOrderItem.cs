@@ -39,5 +39,10 @@ namespace BleakwindBuffet.Data
 		///		A list including any special instructions for the item
 		/// </summary>
 		List<string> SpecialInstructions { get; }
+
+		/// <summary>
+		/// Notifiable property to represent the tostring
+		/// </summary>
+		string String { get; }
 	}
 }

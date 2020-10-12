@@ -30,7 +30,15 @@ namespace PointOfSale
 		/// <summary>
 		/// The order summery screen that keeps track of the items in the order thus far
 		/// </summary>
-		private OrderSummary _orderSummary = new OrderSummary();
+		private OrderSummary _orderSummary;
+		/// <summary>
+		/// The current order
+		/// </summary>
+		private Order _curOrder;
+		/// <summary>
+		/// Keeps a history of all the completed orders
+		/// </summary>
+		private List<Order> _transactionHistory = new List<Order>();
 
 		/// <summary>
 		///		Constructor. Set up and initialize all components in the point of sale
@@ -38,9 +46,31 @@ namespace PointOfSale
 		public MainOrderMenu()
 		{
 			InitializeComponent();
+			NewOrder();
 			ResetMenu();
 			_mainMenu.CurrentMenuItem += OnMenuItemSelect;
 			_orderSummary.EditMenuItem += OnMenuItemSelect;
+		}
+
+		/// <summary>
+		/// Sets the order summary with a new order
+		/// </summary>
+		private void NewOrder()
+		{
+			_curOrder = new Order();
+			_orderSummary = new OrderSummary(_curOrder);
+			_orderSummary.EditMenuItem += OnMenuItemSelect;
+			ResetMenu();
+		}
+
+		/// <summary>
+		/// Enables or disables the navigation buttons
+		/// </summary>
+		/// <param name="en">true for buttons enabling, false if not</param>
+		private void EnableNavButtons(bool en)
+		{
+			uxCancelButton.IsEnabled = en;
+			uxPlaceOrderButton.IsEnabled = en;
 		}
 
 		/// <summary>
@@ -50,6 +80,7 @@ namespace PointOfSale
 		{
 			uxOrderMenuBorder.Child = _mainMenu;
 			uxOrderSummaryBorder.Child = _orderSummary;
+			EnableNavButtons(true);
 		}
 
 		/// <summary>
@@ -62,35 +93,48 @@ namespace PointOfSale
 		/// <param name="e"></param>
 		private void OnMenuItemSelect(object sender, MenuSelectEventArgs e)
 		{
-			e.GetMenu.CancelOrder += OnCancelOrder;
-			e.GetMenu.PlaceOrder += OnPlaceOrder;
+			if( sender is OrderMenu )
+				_orderSummary.AddItem(e.GetMenu.Order);
+			EnableNavButtons(false);
+
+			e.GetMenu.Done += OnCompleteCustomization;
 			uxOrderMenuBorder.Child = (UserControl)e.GetMenu;
 		}
 
 		/// <summary>
-		///		Invoked when the user backs out of a customization window
+		///		Invoked when a user is done customizing an order.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void OnCancelOrder(object sender, EventArgs e)
-		{
-			ResetMenu();
-		}
-
-		/// <summary>
-		///		Invoked when a user places an order. THis order can 
-		///		either be a new order, or an edit of a previously
-		///		ordered item.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void OnPlaceOrder(object sender, EventArgs e)
+		private void OnCompleteCustomization(object sender, EventArgs e)
 		{
 			if(sender is CustomizationMenu menuItem )
 			{
-				_orderSummary.AddItem(menuItem.Order);
 				ResetMenu();
 			}
+		}
+
+		/// <summary>
+		///		When the complete order button is pressed, save this order
+		///		in the completed orders list and start a new one
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OrderCompleteClick(object sender, RoutedEventArgs e)
+		{
+			_transactionHistory.Add(_curOrder);
+			NewOrder();
+		}
+
+		/// <summary>
+		///  This order has been cancelled. Remove all references in the order so it can be used
+		///  for a new one
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OrderCancelledClick(object sender, RoutedEventArgs e)
+		{
+			_curOrder.CancelOrder();
 		}
 	}
 }

@@ -55,8 +55,21 @@ namespace BleakwindBuffet.Data.Entrees
 		protected void OnPropertyChange(PropertyChangedEventArgs e)
 		{
 			PropertyChanged?.Invoke(this, e);
+			switch( e.PropertyName )
+			{
+				case "Price": break;
+				case "Calories": break;
+				default:
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SpecialInstructions"));
+					break;
+			}
 		}
 
+		/// <summary>
+		/// Property that can be notified when the ToString has changed
+		/// </summary>
+		public string String => ToString();
+		
 		/// <summary>
 		///		All Entrees must be able to represent themselves using a valid ToString 
 		///		The base class will return just the name of the Entree. Any child requiring 

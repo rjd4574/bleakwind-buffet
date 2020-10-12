@@ -27,7 +27,7 @@
 			<RowDefinition Height= "5*"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-	<!--Starting to fill in the sections-->
+		<!--Starting to fill in the sections-->
 		<!-- Edge Borders -->
 		<Border Name="TopEdgeBorder" Background="Coral" Grid.ColumnSpan ="5"/>
 		<Border Name="LeftEdgeBorder" Background="Coral" Grid.RowSpan="4"/>
@@ -35,7 +35,7 @@
 		<Border Name="RightEdgeBorder" Background="Coral" Grid.Column="4" Grid.RowSpan="4"/>
 		<Border Name="SeperatorBorder" Background="Coral" Grid.Column="2" Grid.RowSpan="4"/>
 		<!-- Add in the Menu -->
-		<Border Name="uxOrderMenuBorder" Background="Aquamarine" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+		<Border Name="uxOrderMenuBorder" Background="Aquamarine" Grid.Column="1" Grid.Row="1">
 			<Border.Resources>
 				<Style x:Key="uxNavButtons" TargetType="Control">
 					<Setter Property="Background" Value="DarkBlue"/>
@@ -45,9 +45,30 @@
 					<Setter Property="FontWeight" Value="Bold"/>
 				</Style>
 				<Style TargetType="Button" BasedOn="{StaticResource uxNavButtons}"/>
+				<Style x:Key="uxListBoxStyle" TargetType="Control">
+					<Setter Property="FontSize" Value="20"/>
+					<Setter Property="Margin" Value="40,10"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+				</Style>
+				<Style TargetType="ListBox" BasedOn="{StaticResource uxListBoxStyle}"/>
 			</Border.Resources>
 		</Border>
 		<!-- Add Reciept/Order Details -->
 		<Border Name ="uxOrderSummaryBorder" Background="White" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
+		<!-- Nav Buttons -->
+		<Grid Name="uxNavigationGrid" Grid.Column="1" Grid.Row="2" Background="Aquamarine">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Button Name="uxCancelButton" Click="OrderCancelledClick" Grid.Column="0"
+					Background="DarkBlue" Foreground="Yellow" FontSize="16"
+					Margin="5,2" FontWeight="Bold">Cancel Order</Button>
+			<Button Name="uxPlaceOrderButton" Click="OrderCompleteClick" Grid.Column="3"
+					Background="DarkBlue" Foreground="Yellow" FontSize="16"
+					Margin="5,2" FontWeight="Bold">Place Order</Button>
+		</Grid>
 	</Grid>
 </UserControl>

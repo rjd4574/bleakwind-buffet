@@ -85,7 +85,21 @@ namespace BleakwindBuffet.Data.Sides
 		protected void OnPropertyChanged(PropertyChangedEventArgs e)
 		{
 			PropertyChanged?.Invoke(this, e);
+			switch (e.PropertyName)
+			{
+				case "Price": break;
+				case "Calories": break;
+				case "Size":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("String"));
+					break;
+				default: break;
+			}
 		}
+
+		/// <summary>
+		/// Property that can be notified when the ToString has changed
+		/// </summary>
+		public string String => ToString();
 
 		/// <summary>
 		///		All sides must be able to represent themselves using a valid ToString. 

@@ -14,8 +14,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PointOfSale"
+			 xmlns:size="clr-namespace:BleakwindBuffet.Data.Enums;assembly=Data"
+			 xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+		<ObjectDataProvider x:Key="Sizes" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type TypeName="size:Size"/>
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+	</UserControl.Resources>
 	<Grid>
 		<Grid Background="Aquamarine">
 			<Grid.ColumnDefinitions>
@@ -36,21 +45,24 @@
 				</TextBlock>
 			</DockPanel>
 			<!-- Drink Size Options -->
-			<StackPanel Name ="uxSizePanel"  VerticalAlignment="center" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan ="3">
-				<TextBlock VerticalAlignment="center" FontSize="20" Text="  Selct Your Size:  "></TextBlock>
-				<RadioButton Name="uxSizeSmallRadio" VerticalAlignment="center" FontSize="20" Content="Small   "/>
-				<RadioButton Name="uxSizeMediumRadio" VerticalAlignment="center" FontSize="20" Content="Medium   "/>
-				<RadioButton Name="uxSizeLargeRadio" VerticalAlignment="center" FontSize="20" Content="Large   "/>
+			<StackPanel Name ="uxSizePanel"  VerticalAlignment="center" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan ="3" >
+				<ListBox ItemsSource="{Binding Source={StaticResource Sizes}}" SelectedItem="{Binding Path=Size}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
 			</StackPanel>
 			<!-- Drink Options -->
 			<DockPanel Grid.Row="2" Margin="5" LastChildFill="False">
-				<CheckBox Name="uxIceCheck" VerticalContentAlignment="Center" DockPanel.Dock="Top">
+				<CheckBox Name="uxIceCheck" VerticalContentAlignment="Center" DockPanel.Dock="Top"
+						  IsChecked="{Binding Path=Ice}">
 					<TextBlock VerticalAlignment="center" FontSize="20">Ice</TextBlock>
 				</CheckBox>
 			</DockPanel>
 			<!-- Add Navigation Buttons -->
-			<Button Name="uxCancelOrderButton" Click="CancelOrderClick" Grid.Row="3">Cancel Order</Button>
-			<Button Name="uxPlaceOrderButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Place Order</Button>
+			<Button Name="uxDoneButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Done</Button>
 		</Grid>
 	</Grid>
 </local:CustomizationMenu>

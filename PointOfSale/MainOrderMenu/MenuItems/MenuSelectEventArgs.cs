@@ -36,29 +36,30 @@ namespace PointOfSale
 		{
 			if (order is Entree)
 			{
-				if (order is BriarheartBurger) GetMenu = new BriarheartBurgerMenu(order);
-				else if (order is DoubleDraugr) GetMenu = new DoubleDraugrMenu(order);
-				else if (order is GardenOrcOmelette) GetMenu = new GardenOrcOmeletteMenu(order);
-				else if (order is PhillyPoacher) GetMenu = new PhillyPoacherMenu(order);
-				else if (order is SmokehouseSkeleton) GetMenu = new SmokehouseSkeletonMenu(order);
-				else if (order is ThalmorTriple) GetMenu = new ThalmorTripleMenu(order);
-				else if (order is ThugsTBone) GetMenu = new ThugsTBoneMenu(order);
+				if (order is BriarheartBurger) GetMenu = new BriarheartBurgerMenu();
+				else if (order is DoubleDraugr) GetMenu = new DoubleDraugrMenu();
+				else if (order is GardenOrcOmelette) GetMenu = new GardenOrcOmeletteMenu();
+				else if (order is PhillyPoacher) GetMenu = new PhillyPoacherMenu();
+				else if (order is SmokehouseSkeleton) GetMenu = new SmokehouseSkeletonMenu();
+				else if (order is ThalmorTriple) GetMenu = new ThalmorTripleMenu();
+				else if (order is ThugsTBone) GetMenu = new ThugsTBoneMenu();
 			}
 			else if (order is Drink)
 			{
-				if (order is AretinoAppleJuice) GetMenu = new AretinoAppleJuiceMenu(order);
-				else if (order is CandlehearthCoffee) GetMenu = new CandlehearthCoffeeMenu(order);
-				else if (order is MarkarthMilk) GetMenu = new MarkarthMilkMenu(order);
-				else if (order is SailorSoda) GetMenu = new SailorSodaMenu(order);
-				else if (order is WarriorWater) GetMenu = new WarriorWaterMenu(order);
+				if (order is AretinoAppleJuice) GetMenu = new AretinoAppleJuiceMenu();
+				else if (order is CandlehearthCoffee) GetMenu = new CandlehearthCoffeeMenu();
+				else if (order is MarkarthMilk) GetMenu = new MarkarthMilkMenu();
+				else if (order is SailorSoda) GetMenu = new SailorSodaMenu();
+				else if (order is WarriorWater) GetMenu = new WarriorWaterMenu();
 			}
 			else if (order is Side)
 			{
-				if (order is DragonbornWaffleFries) GetMenu = new DragonbornWaffleFriesMenu(order);
-				else if (order is FriedMiraak) GetMenu = new FriedMiraakMenu(order);
-				else if (order is MadOtarGrits) GetMenu = new MadOtarGritsMenu(order);
-				else if (order is VokunSalad) GetMenu = new VokunSaladMenu(order);
+				if (order is DragonbornWaffleFries) GetMenu = new DragonbornWaffleFriesMenu();
+				else if (order is FriedMiraak) GetMenu = new FriedMiraakMenu();
+				else if (order is MadOtarGrits) GetMenu = new MadOtarGritsMenu();
+				else if (order is VokunSalad) GetMenu = new VokunSaladMenu();
 			}
+			GetMenu.DataContext = order;
 		}
 	}
 }

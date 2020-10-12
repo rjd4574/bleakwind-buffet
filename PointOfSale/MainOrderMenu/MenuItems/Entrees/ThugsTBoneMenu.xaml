@@ -35,7 +35,6 @@
 		<DockPanel Grid.Row="1" Margin="5" LastChildFill="False">
 		</DockPanel>
 		<!-- Add Navigation Buttons -->
-		<Button Name="uxCancelOrderButton" Click="CancelOrderClick" Grid.Row="3">Cancel Order</Button>
-		<Button Name="uxPlaceOrderButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Place Order</Button>
+		<Button Name="uxDoneButton" Click="PlaceOrderClick" Grid.Row="3" Grid.Column="2">Done</Button>
 	</Grid>
 </local:CustomizationMenu>
