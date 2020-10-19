@@ -15,6 +15,7 @@ using BleakwindBuffet.Data.Sides;
 using BleakwindBuffet.Data;
 using System.Windows.Input;
 using System.Windows;
+using System.ComponentModel;
 
 namespace PointOfSale
 {
@@ -59,6 +60,8 @@ namespace PointOfSale
 				else if (order is MadOtarGrits) GetMenu = new MadOtarGritsMenu();
 				else if (order is VokunSalad) GetMenu = new VokunSaladMenu();
 			}
+			else if (order is Combo) GetMenu = new ComboMenu(order);
+
 			GetMenu.DataContext = order;
 		}
 	}

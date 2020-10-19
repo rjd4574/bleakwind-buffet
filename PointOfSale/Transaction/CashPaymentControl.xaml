@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="PointOfSale.Transaction.CashPaymentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PointOfSale.Transaction"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10*"/>
+			<RowDefinition Height=".5*"/>
+			<RowDefinition Height="1.5*"/>
+		</Grid.RowDefinitions>
+		<!-- Enter Currency controlls for the Notes -->
+		<StackPanel Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+				<TextBlock Margin="10,0" Text="Customer Payment" FontStyle="Italic" FontWeight="Bold"/>
+				<TextBlock Margin="10,0" Text="Due / Remaining" FontStyle="Italic" FontWeight="Bold"/>
+			</StackPanel>
+			<local:CurrencyControl Denomination="$100" 
+								   Value="{Binding Path=AmountPaid.Hundreds}"
+								   Change="{Binding Path=ChangeDue.Hundreds}"
+								   NotesRemaining="{Binding Path=CashDrawer.Hundreds}"/>
+			<local:CurrencyControl Denomination="$50" 
+								   Value="{Binding Path=AmountPaid.Fifties}"
+								   Change="{Binding Path=ChangeDue.Fifties}"
+								   NotesRemaining="{Binding Path=CashDrawer.Fifties}"/>
+			<local:CurrencyControl Denomination="$20" 
+								   Value="{Binding Path=AmountPaid.Twenties}"
+								   Change="{Binding Path=ChangeDue.Twenties}"
+								   NotesRemaining="{Binding Path=CashDrawer.Twenties}"/>
+			<local:CurrencyControl Denomination="$10" 
+								   Value="{Binding Path=AmountPaid.Tens}"
+								   Change="{Binding Path=ChangeDue.Tens}"
+								   NotesRemaining="{Binding Path=CashDrawer.Tens}"/>
+			<local:CurrencyControl Denomination="$5" 
+								   Value="{Binding Path=AmountPaid.Fives}"
+								   Change="{Binding Path=ChangeDue.Fives}"
+								   NotesRemaining="{Binding Path=CashDrawer.Fives}"/>
+			<local:CurrencyControl Denomination="$2" 
+								   Value="{Binding Path=AmountPaid.Twos}"
+								   Change="{Binding Path=ChangeDue.Twos}"
+								   NotesRemaining="{Binding Path=CashDrawer.Twos}"/>
+			<local:CurrencyControl Denomination="$1" 
+								   Value="{Binding Path=AmountPaid.Ones}"
+								    Change="{Binding Path=ChangeDue.Ones}"
+									NotesRemaining="{Binding Path=CashDrawer.Ones}"/>
+		</StackPanel>
+		
+		<!-- Enter Currency controlls for the Coins -->
+		<StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+				<TextBlock Margin="10,0" Text="Customer Payment" FontStyle="Italic" FontWeight="Bold"/>
+				<TextBlock Margin="10,0" Text="Due / Remaining" FontStyle="Italic" FontWeight="Bold"/>
+			</StackPanel>
+			<local:CurrencyControl Denomination="100c" 
+								   Value="{Binding Path=AmountPaid.Dollars}"
+								   Change="{Binding Path=ChangeDue.Dollars}"
+								   NotesRemaining="{Binding Path=CashDrawer.Dollars}"/>
+			<local:CurrencyControl Denomination="50c" 
+								   Value="{Binding Path=AmountPaid.HalfDollars}"
+								   Change="{Binding Path=ChangeDue.HalfDollars}"
+								   NotesRemaining="{Binding Path=CashDrawer.HalfDollars}"/>
+			<local:CurrencyControl Denomination="25c" 
+								   Value="{Binding Path=AmountPaid.Quarters}"
+								   Change="{Binding Path=ChangeDue.Quarters}"
+								   NotesRemaining="{Binding Path=CashDrawer.Quarters}"/>
+			<local:CurrencyControl Denomination="10c" 
+								   Value="{Binding Path=AmountPaid.Dimes}"
+								   Change="{Binding Path=ChangeDue.Dimes}"
+								   NotesRemaining="{Binding Path=CashDrawer.Dimes}"/>
+			<local:CurrencyControl Denomination="5c" 
+								   Value="{Binding Path=AmountPaid.Nickels}"
+								   Change="{Binding Path=ChangeDue.Nickels}"
+								   NotesRemaining="{Binding Path=CashDrawer.Nickels}"/>
+			<local:CurrencyControl Denomination="1c" 
+								   Value="{Binding Path=AmountPaid.Pennies}"
+								    Change="{Binding Path=ChangeDue.Pennies}"
+									NotesRemaining="{Binding Path=CashDrawer.Pennies}"/>
+		</StackPanel>
+
+		<!-- Layout of Totals-->
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2">
+			<!-- Fonts -->
+			<StackPanel.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="FontSize" Value="25"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+					<Setter Property="Margin" Value="2"/>
+				</Style>
+			</StackPanel.Resources>
+			
+			<Border BorderBrush="Black" Margin="5,0" BorderThickness="2">
+				<Button Margin="0" Click="TransactionCancelButton">
+					<TextBlock Text="Cancel"/>
+				</Button>
+			</Border>
+
+			<!--Total Due-->
+			<Border BorderBrush="BlueViolet" Margin="5,0" BorderThickness="4">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Total: "/>
+					<TextBlock Text="{Binding Path=TotalSale,StringFormat={}{0:$0.00}}" />
+				</StackPanel>
+			</Border>
+			<!-- Amount Due-->
+			<Border BorderBrush="DarkRed" Margin="5,0" BorderThickness="4">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Remaining: "/>
+					<TextBlock Text="{Binding Path=AmountDue,StringFormat={}{0:$0.00}}" />
+				</StackPanel>
+			</Border>
+			<!-- Change Due-->
+			<Border BorderBrush="ForestGreen" Margin="5,0" BorderThickness="4">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Change: "/>
+					<TextBlock Text="{Binding Path=ChangeOwed,StringFormat={}{0:$0.00}}" />
+				</StackPanel>
+			</Border>
+
+			<Border BorderBrush="Black" Margin="5,0" BorderThickness="2">
+				<Button Click="TransactionCompleteButton" Margin="0" IsEnabled="{Binding Path=IsPaid}">
+					<TextBlock Text="Complete"/>
+				</Button>
+			</Border>
+			
+		</StackPanel>
+	</Grid>
+</UserControl>

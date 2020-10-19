@@ -21,14 +21,14 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition/>
+			<RowDefinition Height="1.5*"/>
 			<RowDefinition Height="12*"/>
 			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
 		<!-- Entree Title -->
 		<DockPanel Grid.ColumnSpan="3">
-			<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" TextAlignment="Center" FontSize="20">
-				Customize Your Philly Poacher!
+			<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" 
+						   TextAlignment="Center" FontSize="25" Foreground="DarkBlue">Customize Your Philly Poacher!
 			</TextBlock>
 		</DockPanel>
 		<!-- Entree Options -->

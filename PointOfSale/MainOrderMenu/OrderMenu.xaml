@@ -39,6 +39,24 @@
 			<RowDefinition/>
 			<RowDefinition/>
 			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
+		<!-- IOrderItem Label-->
+		<TextBlock VerticalAlignment="Bottom" FontWeight="Bold" 
+						   TextAlignment="Center" FontSize="25" Foreground="SaddleBrown">Entrees
+		</TextBlock>
+		<TextBlock VerticalAlignment="Bottom" FontWeight="Bold" Grid.Column="1"
+						   TextAlignment="Center" FontSize="25" Foreground="SaddleBrown">Drinks
+		</TextBlock>
+		<TextBlock VerticalAlignment="Bottom" FontWeight="Bold" Grid.Column="2"
+						   TextAlignment="Center" FontSize="25" Foreground="SaddleBrown">Sides
+		</TextBlock>
+		<!--Add Navigation Buttons-->
+		<Button Name="uxCancelOrderButton" Click="CancelOrCompleteOrderClick" 
+				Grid.Row="9" Grid.Column="0" Margin="40,0,40,0">Cancel Order</Button>
+		<Button Name="uxCompleteOrderButton" Click="CancelOrCompleteOrderClick" 
+				Grid.Row="9" Grid.Column="2" Margin="40,0,40,0">Complete Order</Button>
+		<local:OrderButton x:Name="uxAddComboButton" Grid.Row="9" Grid.Column="1" Background="Beige">Add Combo Meal</local:OrderButton>
 	</Grid>
 </UserControl>

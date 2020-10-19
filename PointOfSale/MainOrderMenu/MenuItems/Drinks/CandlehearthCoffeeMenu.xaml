@@ -33,19 +33,19 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition/>
+				<RowDefinition Height="1.5*"/>
 				<RowDefinition Height="3*"/>
 				<RowDefinition Height="12*"/>
 				<RowDefinition Height="2*"/>
 			</Grid.RowDefinitions>
 			<!-- Drink Title -->
 			<DockPanel Grid.ColumnSpan="3">
-				<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" TextAlignment="Center" FontSize="20">
-				Customize your Candlehearth Coffee!
+				<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" 
+						   TextAlignment="Center" FontSize="25" Foreground="DarkBlue">Customize your Candlehearth Coffee!
 				</TextBlock>
 			</DockPanel>
 			<!-- Drink Size Options -->
-			<StackPanel Name ="uxSizePanel"  VerticalAlignment="center" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan ="3" >
+			<StackPanel Name ="uxSizePanel" HorizontalAlignment="Center"  VerticalAlignment="center" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan ="3" >
 				<ListBox ItemsSource="{Binding Source={StaticResource Sizes}}" SelectedItem="{Binding Path=Size}">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>

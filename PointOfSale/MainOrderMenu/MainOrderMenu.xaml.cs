@@ -6,27 +6,32 @@
 
 using System;
 using BleakwindBuffet.Data;
-using BleakwindBuffet.Data.Entrees;
-using BleakwindBuffet.Data.Drinks;
-using BleakwindBuffet.Data.Sides;
-using BleakwindBuffet.Data.Enums;
 using System.Windows.Controls;
 using System.Windows;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using System.Windows.Media;
+using System.ComponentModel;
+using PointOfSale.Transaction;
+using System.Transactions;
 
 namespace PointOfSale
 {
 	/// <summary>
 	///		Logic behind the point of sale's Main order menu
 	/// </summary>
-	public partial class MainOrderMenu :UserControl 
+	public partial class MainOrderMenu : UserControl 
 	{
 		/// <summary>
 		///		The order menu screen where user can select a menu item
 		/// </summary>
 		private OrderMenu _mainMenu = new OrderMenu();
+		/// <summary>
+		/// Current combo (if any) being built
+		/// </summary>
+		private ComboMenu _comboMenu;
+		/// <summary>
+		/// Current transaction (if any) in progress
+		/// </summary>
+		private TransactionControl _transaction;
 		/// <summary>
 		/// The order summery screen that keeps track of the items in the order thus far
 		/// </summary>
@@ -49,6 +54,7 @@ namespace PointOfSale
 			NewOrder();
 			ResetMenu();
 			_mainMenu.CurrentMenuItem += OnMenuItemSelect;
+			_mainMenu.PropertyChanged += OnCancelOrCompleteOrder;
 			_orderSummary.EditMenuItem += OnMenuItemSelect;
 		}
 
@@ -64,23 +70,16 @@ namespace PointOfSale
 		}
 
 		/// <summary>
-		/// Enables or disables the navigation buttons
-		/// </summary>
-		/// <param name="en">true for buttons enabling, false if not</param>
-		private void EnableNavButtons(bool en)
-		{
-			uxCancelButton.IsEnabled = en;
-			uxPlaceOrderButton.IsEnabled = en;
-		}
-
-		/// <summary>
 		///		Set menu to its default state. 
 		/// </summary>
 		private void ResetMenu()
 		{
-			uxOrderMenuBorder.Child = _mainMenu;
+			if(_comboMenu!=null)
+				uxOrderMenuBorder.Child = _comboMenu;
+			else
+				uxOrderMenuBorder.Child = _mainMenu;
+
 			uxOrderSummaryBorder.Child = _orderSummary;
-			EnableNavButtons(true);
 		}
 
 		/// <summary>
@@ -93,11 +92,17 @@ namespace PointOfSale
 		/// <param name="e"></param>
 		private void OnMenuItemSelect(object sender, MenuSelectEventArgs e)
 		{
+			// clicked on from list of all IOrderItems
 			if( sender is OrderMenu )
 				_orderSummary.AddItem(e.GetMenu.Order);
-			EnableNavButtons(false);
+
+			// Edit Item from combo meal
+			if (sender is ComboMenu menu)
+				// The combo meal is the temporary default menu
+				_comboMenu = menu;
 
 			e.GetMenu.Done += OnCompleteCustomization;
+			e.GetMenu.EditItemEvent += OnMenuItemSelect;
 			uxOrderMenuBorder.Child = (UserControl)e.GetMenu;
 		}
 
@@ -108,6 +113,8 @@ namespace PointOfSale
 		/// <param name="e"></param>
 		private void OnCompleteCustomization(object sender, EventArgs e)
 		{
+			if( _comboMenu != null && sender is ComboMenu )
+				_comboMenu =null;
 			if(sender is CustomizationMenu menuItem )
 			{
 				ResetMenu();
@@ -120,21 +127,31 @@ namespace PointOfSale
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void OrderCompleteClick(object sender, RoutedEventArgs e)
+		private void OnCancelOrCompleteOrder(object sender, PropertyChangedEventArgs e)
 		{
-			_transactionHistory.Add(_curOrder);
-			NewOrder();
+			switch(e.PropertyName)
+			{
+				case "Complete":	// start the transaction
+					_transaction = new TransactionControl(_curOrder);
+					_transaction.PropertyChanged += OnCancelOrCompleteOrder;
+					uxOrderMenuBorder.Child = _transaction;
+					break;
+				case "Cancel":		// cancel the order
+					_curOrder.CancelOrder();
+					break;
+				case "TransactionComplete":		// transaction complete, start new order
+					_transactionHistory.Add(_curOrder);
+					_transaction.PropertyChanged -= OnCancelOrCompleteOrder;
+					NewOrder();
+					break;
+				case "TransactionCancel":		// transaction cancel, stay with this order
+					_transaction.PropertyChanged -= OnCancelOrCompleteOrder;
+					ResetMenu();
+					break;
+				default: break;
+			}
+			
 		}
 
-		/// <summary>
-		///  This order has been cancelled. Remove all references in the order so it can be used
-		///  for a new one
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void OrderCancelledClick(object sender, RoutedEventArgs e)
-		{
-			_curOrder.CancelOrder();
-		}
 	}
 }

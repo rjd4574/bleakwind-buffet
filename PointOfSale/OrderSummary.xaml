@@ -29,11 +29,11 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<!-- Insert the components -->
-		<TextBlock Name="uxOrderNumber" FontWeight="Bold" FontSize="15" 
+		<TextBlock Name="uxOrderNumber" FontWeight="Bold" FontSize="20" 
 				   VerticalAlignment="Center" TextAlignment="Center" Grid.ColumnSpan="2" 
 					Text="{Binding Path=TicketNumber,StringFormat=Order Number {0:0}}"/>
 
-		<ListView Name="uxOrderList" ItemsSource="{Binding}" Grid.Row="1" Grid.ColumnSpan="2">
+		<ListView Name="uxOrderList" ItemsSource="{Binding}" FontSize="14" Grid.Row="1" Grid.ColumnSpan="2">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<!-- Could not get the dockpanel to be the correct width. Most of this width setting was adjusted from a solution i found on StackOverflow.com -->

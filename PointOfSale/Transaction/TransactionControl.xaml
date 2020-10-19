@@ -1,0 +1,51 @@
+﻿
+	
+	
+	<UserControl x:Class="PointOfSale.Transaction.TransactionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PointOfSale.Transaction"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="10*"/>
+			<RowDefinition Height=".5*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<StackPanel.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="FontSize" Value="25"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+				</Style>
+			</StackPanel.Resources>
+			
+			
+			<Border BorderBrush="Black" BorderThickness="2" Margin="2">
+				<local:TransactionTypeButton x:Name="uxCashButton" Checked="OnTogglePayment">
+					<TextBlock Text=" Cash "/>
+				</local:TransactionTypeButton>
+			</Border>
+
+			<Border BorderBrush="Black" BorderThickness="2" Margin="2">
+				<local:TransactionTypeButton x:Name="uxCreditButton" Checked="OnTogglePayment">
+					<TextBlock Text=" Credit "/>
+				</local:TransactionTypeButton>
+			</Border>
+
+			<Border BorderBrush="Black" BorderThickness="2" Margin="2">
+				<local:TransactionTypeButton x:Name="uxDebitButton" Checked="OnTogglePayment">
+					<TextBlock Text=" Debit "/>
+				</local:TransactionTypeButton>
+			</Border>
+
+
+		</StackPanel>
+
+		<Border Name="uxTransactionBorder" Grid.Row="1"/>
+	</Grid>
+</UserControl>

@@ -16,6 +16,7 @@ namespace PointOfSale
 	/// </summary>
 	public abstract partial class CustomizationMenu : UserControl
 	{
+		public event EventHandler<MenuSelectEventArgs> EditItemEvent;
 		/// <summary>
 		///		Event that activates when the order is done being customized.
 		/// </summary>
@@ -34,6 +35,12 @@ namespace PointOfSale
 		protected void PlaceOrderClick(object sender, RoutedEventArgs e)
 		{
 			Done?.Invoke(this, e);
+		}
+
+		protected void EditItemClick(object sender, RoutedEventArgs e)
+		{
+			if (sender is OrderButton butt && butt.MenuItem != null)
+				EditItemEvent?.Invoke(this, new MenuSelectEventArgs(butt.MenuItem));
 		}
 	}
 }

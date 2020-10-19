@@ -82,8 +82,8 @@ namespace BleakwindBuffet.Data
 			{
 				List<string> list = new List<string>();
 				if (_hasEntree) list.AddRange(GetInstructions(Entree));
-				if (_hasSide) list.AddRange(GetInstructions(Side));
 				if (_hasDrink) list.AddRange(GetInstructions(Drink));
+				if (_hasSide) list.AddRange(GetInstructions(Side));		
 				return list;
 			}
 		}
@@ -95,7 +95,11 @@ namespace BleakwindBuffet.Data
 		/// <summary>
 		///		The entree for this combo
 		/// </summary>
-		public Entree Entree => _entree;
+		public Entree Entree
+		{
+			get => _entree;
+			set => Add(value);
+		}
 		/// <summary>
 		/// Indicates whether an Entree has been aded to the combo
 		/// </summary>
@@ -108,7 +112,11 @@ namespace BleakwindBuffet.Data
 		/// <summary>
 		///	The Drink for this combo
 		/// </summary>
-		public Drink Drink => _drink;
+		public Drink Drink
+		{
+			get => _drink;
+			set => Add(value);
+		}
 		/// <summary>
 		/// Indicates whether the Drink a been added to the combo
 		/// </summary>
@@ -121,7 +129,11 @@ namespace BleakwindBuffet.Data
 		/// <summary>
 		/// The side for this combo
 		/// </summary>
-		public Side Side => _side;
+		public Side Side
+		{
+			get => _side;
+			set => Add(value);
+		}
 		/// <summary>
 		/// Indicates whether a Side has been added to the combo
 		/// </summary>
@@ -133,8 +145,12 @@ namespace BleakwindBuffet.Data
 		/// </summary>
 		public bool IsComplete => (_hasEntree && _hasDrink && _hasSide);
 
-		public Combo() { }
-		public Combo (Entree entree, Drink drink, Side side)
+		public List<IOrderItem> EntreeList;
+		public List<IOrderItem> DrinkList;
+		public List<IOrderItem> SideList;
+
+		public Combo() { LoadItemList(); }
+		public Combo(Entree entree, Drink drink, Side side) : this()
 		{
 			Add(entree);
 			Add(drink);
@@ -170,6 +186,7 @@ namespace BleakwindBuffet.Data
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price"));
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Calories"));
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SpecialInstructions"));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("String"));
 		}
 
 		private void IOrderItemChangedListener(Object sender, PropertyChangedEventArgs e)
@@ -193,9 +210,9 @@ namespace BleakwindBuffet.Data
 		private List<string> GetInstructions(IOrderItem item)
 		{
 			List<string> list = new List<String>();
-			list.Add(item.ToString());
+			list.Add($"=>{item.ToString()}");
 			foreach (string instruction in item.SpecialInstructions)
-				list.Add(instruction);
+				list.Add($"\t-->{instruction}");
 			return list;
 		}
 
@@ -203,5 +220,19 @@ namespace BleakwindBuffet.Data
 		/// Satisfies IOrderItem Requirement
 		/// </summary>
 		public string String => ToString();
+
+		public override string ToString()
+		{
+			return $"{((IsComplete) ? "" : "(Incomplete) ")}Combo Meal";
+		}
+
+
+
+		private void LoadItemList()
+		{
+			EntreeList = (List<IOrderItem>)Menu.EntreeItems();
+			DrinkList = (List<IOrderItem>)Menu.DrinkItems();
+			SideList = (List<IOrderItem>)Menu.SideItems();
+		}
 	}
 }

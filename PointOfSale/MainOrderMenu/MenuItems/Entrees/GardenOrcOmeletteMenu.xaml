@@ -23,14 +23,14 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition/>
+			<RowDefinition Height="1.5*"/>
 			<RowDefinition Height="12*"/>
 			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
 		<!-- Entree Title -->
 		<DockPanel Grid.ColumnSpan="3">
-			<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" TextAlignment="Center" FontSize="20">
-				Customize your Garden Orc Omelette!
+			<TextBlock Name="TitleBlock" DockPanel.Dock= "Bottom" VerticalAlignment="Bottom" FontWeight="Bold" 
+						   TextAlignment="Center" FontSize="25" Foreground="DarkBlue">Customize your Garden Orc Omelette!
 			</TextBlock>
 		</DockPanel>
 		<!-- Entree Options -->

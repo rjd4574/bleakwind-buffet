@@ -16,18 +16,24 @@ using BleakwindBuffet.Data.Entrees;
 using BleakwindBuffet.Data.Drinks;
 using BleakwindBuffet.Data.Sides;
 using BleakwindBuffet.Data.Enums;
+using System.ComponentModel;
 
 namespace PointOfSale
 {
 	/// <summary>
 	///		Interaction logic for OrderMenu.xaml
 	/// </summary>
-	public partial class OrderMenu : UserControl
+	public partial class OrderMenu : UserControl, INotifyPropertyChanged
 	{
 		/// <summary>
 		///		Event activates when any of the menu items are selected
 		/// </summary>
 		public event EventHandler<MenuSelectEventArgs> CurrentMenuItem;
+
+		/// <summary>
+		/// Used to notify of a canceled or completed Order
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
 		///		Constructor, Initializes the main components and dynamically draws
@@ -47,6 +53,8 @@ namespace PointOfSale
 			InitializeButtons((List<IOrderItem>)BleakwindBuffet.Data.Menu.EntreeItems(), 0);
 			InitializeButtons((List<IOrderItem>)BleakwindBuffet.Data.Menu.DrinkItems(), 1);
 			InitializeButtons((List<IOrderItem>)BleakwindBuffet.Data.Menu.SideItems(), 2);
+			uxAddComboButton.MenuItem = new Combo();
+			uxAddComboButton.Click += ItemSelect;
 		}
 
 		/// <summary>
@@ -63,10 +71,11 @@ namespace PointOfSale
 				b.MenuItem = item[row];
 				b.Click += ItemSelect;
 				Grid.SetColumn(b, col);
-				Grid.SetRow(b, row);
+				Grid.SetRow(b, row+1);
 				uxOrderMenu.Children.Add(b);
 			}
 		}
+
 
 		/// <summary>
 		///		When a new menu item is selected from the screen, a menuitem action is
@@ -81,6 +90,28 @@ namespace PointOfSale
 			{
 				var newItem = (IOrderItem)Activator.CreateInstance(butt.MenuItem.GetType());
 				CurrentMenuItem?.Invoke(this, new MenuSelectEventArgs(newItem));
+			}
+		}
+
+		/// <summary>
+		/// Sends notification that this order has been completed. 
+		/// Property is whether the order is to be completed or cancelled.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CancelOrCompleteOrderClick(object sender, RoutedEventArgs e)
+		{
+			if (!(sender is Button))
+				return;
+			switch(((Button)sender).Name)
+			{
+				case "uxCancelOrderButton":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Cancel"));
+					break;
+				case "uxCompleteOrderButton":
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Complete"));
+					break;
+				default: break;
 			}
 		}
 	}
