@@ -1,6 +1,6 @@
 ﻿/*- Menu.cs									Created: 09SEP20
  * Author: Ryan Dentremont					CIS 400 MWF @ 1330
- * 
+ *											Updated: 06NO20
  *	Static class that Allows retrieval of all items on the menu: Drinks, Entrees, and Sides
  */
 
@@ -10,6 +10,7 @@ using BleakwindBuffet.Data.Enums;
 using BleakwindBuffet.Data.Sides;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace BleakwindBuffet.Data
@@ -19,6 +20,16 @@ namespace BleakwindBuffet.Data
 	/// </summary>
 	public static class Menu
 	{
+		public static string[] Types
+		{
+			get => new string[]
+			{
+				"Entree",
+				"Drink",
+				"Side"
+			};
+		}
+
 		/// <summary>
 		/// Creates a list of Entree items that can be ordered
 		/// </summary>
@@ -125,6 +136,105 @@ namespace BleakwindBuffet.Data
 
 			return list;
 		}
+
+		/// <summary>
+		/// Allows a search of all menu types with the given search criterea.
+		/// Search is based on whether the ToString of the IOrderItem contains
+		/// the search string
+		/// </summary>
+		/// <param name="type">type of order (entree/drink/side)</param>
+		/// <param name="search">search criterea to match</param>
+		/// <returns></returns>
+		public static IEnumerable<IOrderItem> Search(string type, string search)
+		{
+			List<IOrderItem> results = new List<IOrderItem>();
+
+			switch(type)
+			{
+				// Entree
+				case "Entree":
+					if (search == null) return Entrees();
+					foreach (IOrderItem item in Entrees())
+						if (item.String.ToLower().Contains(search.ToLower())) results.Add(item);
+					return results;
+				// Drink
+				case "Drink":
+					if (search == null) return Drinks();
+					foreach (IOrderItem item in Drinks())
+						if (item.String.ToLower().Contains(search.ToLower())) results.Add(item);
+					return results;
+				// Entree
+				case "Side":
+					if (search == null) return Sides();
+					foreach (IOrderItem item in Sides())
+						if (item.String.ToLower().Contains(search.ToLower())) results.Add(item);
+					return results;
+
+				default: return null;
+				throw new NotImplementedException($"Menu type is not recognized: {type}");
+			}
+		}
+
+		/// <summary>
+		/// Allows filtering search results to ensure they fit between a calorie range
+		/// </summary>
+		/// <param name="orders">list of menu items to be filtered</param>
+		/// <param name="min">min amount of calories item must have</param>
+		/// <param name="max">max amount of calories item must have</param>
+		/// <returns>List of IOrderItems who's calories are within the privided range</returns>
+		public static IEnumerable<IOrderItem> FilterByCalories(IEnumerable<IOrderItem> orders, float? min, float? max)
+		{
+			if (min == null && max == null) return orders;
+			List<IOrderItem> results = new List<IOrderItem>();
+
+			if( min == null )
+			{
+				foreach (IOrderItem order in orders)
+					if (order.Calories <= max) results.Add(order);
+				return results;
+			}
+			if( max == null )
+			{
+				foreach (IOrderItem order in orders)
+					if (order.Calories >= min) results.Add(order);
+				return results;
+			}
+			foreach (IOrderItem order in orders)
+				if (order.Calories >= min && order.Calories <= max) results.Add(order);
+			return results;
+		}
+
+		/// <summary>
+		/// Allows filtering search results to ensure they fit between a price range
+		/// </summary>
+		/// <param name="orders">list of menu items to be filtered</param>
+		/// <param name="min">min price item must have</param>
+		/// <param name="max">max price item must have</param>
+		/// <returns>List of IOrderItems who's price is within the privided range</returns>
+		public static IEnumerable<IOrderItem> FilterByPrice(IEnumerable<IOrderItem> orders, float? min, float? max)
+		{
+			if (min == null && max == null) return orders;
+			List<IOrderItem> results = new List<IOrderItem>();
+
+			if (min == null)
+			{
+				foreach (IOrderItem order in orders)
+					if (order.Price <= max) results.Add(order);
+				return results;
+			}
+			if (max == null)
+			{
+				foreach (IOrderItem order in orders)
+					if (order.Price >= min) results.Add(order);
+				return results;
+			}
+			foreach (IOrderItem order in orders)
+				if (order.Price >= min && order.Price <= max) results.Add(order);
+			return results;
+		}
+
+
+
 
 
 

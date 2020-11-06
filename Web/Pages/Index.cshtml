@@ -3,7 +3,9 @@
 @page
 @using BleakwindBuffet.Data;
 @using BleakwindBuffet.Data.Enums;
-
+@using BleakwindBuffet.Data.Entrees;
+@using BleakwindBuffet.Data.Drinks;
+@using BleakwindBuffet.Data.Sides;
 
 @model IndexModel
 @{
@@ -22,58 +24,97 @@
     earned your loot, so spend it with us!.
 </p>
 
-<h3 class="Add">Add a Combo Meal!</h3>
+<h3 class="Combo">Add a Combo Meal!</h3>
 <p>By combining an Entree, drink, and side together you can take $1.00 off the price of your meal.</p>
 
 <h3 class="Add"</h3>Choose From Six Soda Flavors!</h3>
 <div class="flavor">
     <div>Including: </div>
     <ul class="flavor-list">
-        @foreach(SodaFlavor flavor in Enum.GetValues(typeof(SodaFlavor)))
+        @foreach (SodaFlavor flavor in Enum.GetValues(typeof(SodaFlavor)))
         {
             <li class="sodaflavor">@EnumExt.Print(flavor)</li>
         }
     </ul>
+ </div>
 
-</div>
-<ul class="Menu-List">
-    <!-- ENTREES -->
-    <div class="List">
-        <h2 class="Menu-Type">Entrees</h2>
-        @foreach (IOrderItem item in Menu.Entrees())
-        {
-            <li>
-                <div class="Calories">@($"{item.Calories} Cal.")</div>
-                <div class="String">@item.String</div>
-                <div class="Price">@String.Format("{0:c}", item.Price)</div>
-            </li>
-        }
+<form id="menu-database">
+    <!-- Filter by Type -->
+    <div id="filters">
+
+        <!-- Filter by Calories-->
+        <div>
+            <div>
+                <h4>Calories</h4>
+            </div>
+            <div id="numberBox">
+                Between
+                <input name="CaloriesMin" type="number" min="0" max="1000" step="1" value="@Model.CaloriesMin" placeholder="Min" />
+                and
+                <input name="CaloriesMax" type="number" min="0" max="1000" step="1" value="@Model.CaloriesMax" placeholder="Max" />
+            </div>
+        </div>
+
+
+        <!-- Middle -->
+        <div>
+            <div id="type">
+                @foreach (String type in Menu.Types)
+                {
+                    <label id="chckbox">
+                        <input type="checkbox" name="TypeCheck" value="@type" checked="@Model.SearchTypes.Keys.Contains(type)" />
+                        @type
+                    </label>
+                }
+            </div>
+
+            <!-- Searchable controls -->
+            <div id="search">
+                <input type="text" name="SearchTerms" value="@Model.SearchTerms" />
+                <input type="submit" value="Search" />
+            </div>
+        </div>
+
+
+        <!-- Filter by Price-->
+        <div>
+            <div>
+                <h4>Price</h4>
+            </div>
+            <div id="numberBox">
+                Between
+                $<input name="PriceMin" type="number" min="0" max="10" step=".01" value="@Model.PriceMin" placeholder="Min" />
+                and
+                $<input name="PriceMax" type="number" min="0" max="10" step=".01" value="@Model.PriceMax" placeholder="Max" />
+            </div>
+        </div>
     </div>
+    
 
-    <!-- Drinks -->
-    <div class="List">
-        <h2 class="Menu-Type">Drinks</h2>
-        @foreach (IOrderItem item in Menu.Drinks())
+
+
+
+
+
+
+
+
+    <div class="Menu-List">
+        @foreach (string type in Model.SearchTypes.Keys)
         {
-            <li>
-                <div class="Calories">@($"{item.Calories} Cal. ")</div>
-                <div class="String">@item.String</div>
-                <div class="Price">@String.Format("{0:c}", item.Price)</div>
-            </li>
+            <div class="List">
+                <h2 class="Menu-Type">@($"{type}s")</h2>
+                @foreach (IOrderItem item in Model.SearchTypes[type])
+                {
+            
+                    <li>
+                        <div class="Calories">@($"{item.Calories} Cal.")</div>
+                        <div class="String">@item.String</div>
+                        <div class="Price">@String.Format("{0:c}", item.Price)</div>
+                    </li>
+                }
+            </div>
         }
-    </div>
 
-    <!-- Drinks -->
-    <div class="List">
-        <h2 class="Menu-Type">Sides</h2>
-        @foreach (IOrderItem item in Menu.Sides())
-        {
-            <li>
-                <div class="Calories">@($"{item.Calories} Cal. ")</div>
-                <div class="String">@item.String</div>
-                <div class="Price">@String.Format("{0:c}", item.Price)</div>
-            </li>
-        }
     </div>
-
-</ul>
+</form>

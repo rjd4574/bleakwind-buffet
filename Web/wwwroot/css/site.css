@@ -2,14 +2,50 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 
+#filters 
+{
+    display: flex;
+    flex-direction: row; 
+    padding: 2px;   
+    text-align:center;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+#type
+{
+    font-size: 1.5rem;
+}
+#search 
+{
+    text-align: center;
+    margin: 10px;
+}
+
+#filters input[type=number]
+{
+    width: 5rem;
+}
+
+#numberBox
+{
+    font-size: 1rem;
+}
+
 .flavor-list
 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 2px solid darkred;
 }
 
-.Menu-List
+.Combo 
+{
+    border-top: 2px solid darkred;
+}
+
+.Menu-List 
 {
     list-style-type: none;
     border-top: 1px solid green;
@@ -32,7 +68,7 @@ for details on configuring this project to bundle and minify static web assets. 
     text-align: center;
 }
 
-.List > li 
+.List > li
 {
     list-style-type: none;
     border-top: 1px solid lightgray;
@@ -51,7 +87,11 @@ for details on configuring this project to bundle and minify static web assets. 
     text-align: center;
 }
 
-
+.container
+{
+    margin: 10;
+    padding: 0;
+}
 
 
 

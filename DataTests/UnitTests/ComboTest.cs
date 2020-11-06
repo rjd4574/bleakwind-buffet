@@ -225,9 +225,9 @@ namespace BleakwindBuffet.DataTests.UnitTests
 		/// <param name="meal"></param>
 		public  void TestEntreeSpecialInstructions(Combo meal)
 		{
-			Assert.Contains("Briarheart Burger",meal.SpecialInstructions);
-			Assert.Contains("Hold ketchup", meal.SpecialInstructions);
-			Assert.Contains("Hold cheese", meal.SpecialInstructions);
+			Assert.Contains("=>Briarheart Burger",meal.SpecialInstructions);
+			Assert.Contains("\t-->Hold ketchup", meal.SpecialInstructions);
+			Assert.Contains("\t-->Hold cheese", meal.SpecialInstructions);
 		}
 
 		/// <summary>
@@ -251,8 +251,8 @@ namespace BleakwindBuffet.DataTests.UnitTests
 		public void TestDrinkSpecialInstructions(Combo meal)
 		{
 			
-			Assert.Contains("Medium Decaf Candlehearth Coffee", meal.SpecialInstructions);
-			Assert.Contains("Add cream", meal.SpecialInstructions);
+			Assert.Contains("=>Medium Decaf Candlehearth Coffee", meal.SpecialInstructions);
+			Assert.Contains("\t-->Add cream", meal.SpecialInstructions);
 		}
 
 		/// <summary>
@@ -273,7 +273,7 @@ namespace BleakwindBuffet.DataTests.UnitTests
 		/// <param name="meal"></param>
 		public void TestSideSpecialInstructions(Combo meal)
 		{
-			Assert.Contains("Large Fried Miraak", meal.SpecialInstructions);
+			Assert.Contains("=>Large Fried Miraak", meal.SpecialInstructions);
 		}
 
 		/// <summary>
