@@ -138,6 +138,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public BriarheartBurger()
 		{
 			_name = "Briarheart Burger";
+			_description = "Single patty burger on a brioche bun. Comes with ketchup, mustard, pickle, and cheese.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

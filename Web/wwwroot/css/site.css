@@ -1,6 +1,17 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.description 
+{
+    font-size: .75rem;
+    text-align:center;
+}
+
+.Name
+{
+    font-weight: bold;
+}
+
 
 #filters 
 {
@@ -79,12 +90,17 @@ for details on configuring this project to bundle and minify static web assets. 
     justify-content: space-between;
 }
 
+.Calories 
+{
+   font-weight: bold;
+}
 .Price
 {
     color: black;
     border: 1px solid black;
     width: 50px;
     text-align: center;
+    font-weight: bold;
 }
 
 .container
@@ -94,7 +110,13 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 
-
+@media (max-width: 490px)
+{
+    .Menu-List
+    {
+        flex-direction: column;
+    }
+}
 
 
 

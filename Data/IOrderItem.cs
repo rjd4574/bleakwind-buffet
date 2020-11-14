@@ -26,6 +26,11 @@ namespace BleakwindBuffet.Data
 		string Name {get;}
 
 		/// <summary>
+		/// Description of the IOrderItem
+		/// </summary>
+		string Description { get; }
+
+		/// <summary>
 		///		Defines the price of the item
 		/// </summary>
 		double Price {get;}

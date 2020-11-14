@@ -21,6 +21,7 @@ namespace BleakwindBuffet.Data.Sides
 		public FriedMiraak()
 		{
 			_name = "Fried Miraak";
+			_description = "Perfectly prepared hash brown pancakes.";
 			SideValues.SetDefaults(this);
 		}
 	}

@@ -54,6 +54,7 @@ namespace BleakwindBuffet.Data.Drinks
 		public MarkarthMilk()
 		{
 			_name = "Markarth Milk";
+			_description = "Hormone-free organic 2% milk.";
 			DrinkValues.SetDefaults(this);
 		}
 	}

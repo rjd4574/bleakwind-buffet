@@ -25,11 +25,19 @@ namespace BleakwindBuffet.Data.Drinks
 		///		Protected backing variable for the name of the drink
 		/// </summary>
 		protected string _name;
-
 		/// <summary>
 		/// The name of the drink
 		/// </summary>
 		public string Name => _name;
+
+		/// <summary>
+		/// protected backing variable for the discription of the drink
+		/// </summary>
+		protected string _description;
+		/// <summary>
+		/// Description of the drink
+		/// </summary>
+		public string Description => _description;
 
 		/// <summary>
 		///		Private backing variable for the Size of the drink

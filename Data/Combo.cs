@@ -37,6 +37,15 @@ namespace BleakwindBuffet.Data
 		public string Name => _name;
 
 		/// <summary>
+		/// private backing variable for the description of the combo;
+		/// </summary>
+		private string _description = "Combo";
+		/// <summary>
+		/// the description of the combo
+		/// </summary>
+		public string Description => _description;
+
+		/// <summary>
 		///		Discount when ordering a complete combo
 		/// </summary>
 		public double Discount => 1.00;

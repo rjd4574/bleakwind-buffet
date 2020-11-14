@@ -203,6 +203,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public DoubleDraugr()
 		{
 			_name = "Double Draugr";
+			_description = "Double patty burger on a brioche bun. Comes with ketchup, mustard, pickle, cheese, tomato, lettuce, and mayo.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

@@ -121,6 +121,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public SmokehouseSkeleton()
 		{
 			_name = "Smokehouse Skeleton";
+			_description = "Put some meat on those bones with a small stack of pancakes. Includes sausage links, eggs, and hash browns on the side. Topped with the syrup of your choice.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

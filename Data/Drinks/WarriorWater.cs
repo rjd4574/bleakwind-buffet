@@ -77,6 +77,7 @@ namespace BleakwindBuffet.Data.Drinks
 		public WarriorWater()
 		{
 			_name = "Warrior Water";
+			_description = "It's water. Just water.";
 			DrinkValues.SetDefaults(this);
 		}
 	}

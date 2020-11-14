@@ -23,6 +23,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public ThugsTBone()
 		{
 			_name = "Thugs T-Bone";
+			_description = "Juicy T-Bone, not much else to say.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

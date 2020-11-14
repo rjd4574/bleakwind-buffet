@@ -77,6 +77,7 @@ namespace BleakwindBuffet.Data.Drinks
 		public SailorSoda()
 		{
 			_name = "Sailor Soda";
+			_description = "An old-fashioned jerked soda, carbonated water and flavored syrup poured over a bed of crushed ice.";
 			DrinkValues.SetDefaults(this);
 		}
 		

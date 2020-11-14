@@ -22,6 +22,7 @@ namespace BleakwindBuffet.Data.Sides
 		public VokunSalad()
 		{
 			_name = "Vokun Salad";
+			_description = "A seasonal fruit salad of mellons, berries, mango, grape, apple, and oranges.";
 			SideValues.SetDefaults(this);
 		}
 	}

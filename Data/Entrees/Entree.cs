@@ -24,11 +24,19 @@ namespace BleakwindBuffet.Data.Entrees
 		///		Protected backing variable for the name of the Entree
 		/// </summary>
 		protected string _name;
-
 		/// <summary>
 		/// The name of the Entree
 		/// </summary>
 		public string Name => _name;
+
+		/// <summary>
+		/// protected backing variable for the discription of the Entree
+		/// </summary>
+		protected string _description;
+		/// <summary>
+		/// Description of the Entree
+		/// </summary>
+		public string Description => _description;
 
 		/// <summary>
 		///		Gets the price of the Entree

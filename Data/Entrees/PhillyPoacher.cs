@@ -98,6 +98,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public PhillyPoacher()
 		{
 			_name = "Philly Poacher";
+			_description = "Cheesesteak sandwich made from grilled sirloin, topped with onions on a fried roll.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

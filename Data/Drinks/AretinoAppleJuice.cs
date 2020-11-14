@@ -53,6 +53,7 @@ namespace BleakwindBuffet.Data.Drinks
 		public AretinoAppleJuice()
 		{
 			_name = "Aretino Apple Juice";
+			_description = "Fresh squeezed apple juice.";
 			DrinkValues.SetDefaults(this);
 		}
 	}

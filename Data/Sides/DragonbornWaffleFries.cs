@@ -21,6 +21,7 @@ namespace BleakwindBuffet.Data.Sides
 		public DragonbornWaffleFries()
 		{
 			_name = "Dragonborn Waffle Fries";
+			_description = "Crispy fried potato waffle fries.";
 			SideValues.SetDefaults(this);
 		}
 	}

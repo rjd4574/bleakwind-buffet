@@ -88,6 +88,7 @@ namespace BleakwindBuffet.Data.Drinks
 		public CandlehearthCoffee()
 		{
 			_name = "Candlehearth Coffee";
+			_description = "Fair trade, fresh ground dark roast coffee.";
 			DrinkValues.SetDefaults( this );
 		}
 		

@@ -25,11 +25,19 @@ namespace BleakwindBuffet.Data.Sides
 		///		Protected backing variable for the name of the side
 		/// </summary>
 		protected string _name;
-
 		/// <summary>
 		/// The name of the side
 		/// </summary>
 		public string Name => _name;
+
+		/// <summary>
+		///  protected backing variable for the description of the Side
+		/// </summary>
+		protected string _description;
+		/// <summary>
+		/// the description of the side
+		/// </summary>
+		public string Description => _description;
 
 		/// <summary>
 		///		Private backing variable for the Size of the side

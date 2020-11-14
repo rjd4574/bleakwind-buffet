@@ -123,6 +123,17 @@ namespace BleakwindBuffet.Data
 			return list;
 		}
 
+		public static IEnumerable<IOrderItem> Partial(string category)
+		{
+			switch (category)
+			{
+				case "Entree": return Entrees();
+				case "Drink": return Drinks();
+				case "Side": return Sides();
+				default: throw new NotImplementedException($"Category of Menu not recognized: {category}");
+			}
+		}
+
 		/// <summary>
 		///	creates a list of all items that can be ordered
 		///	(Entree, Side, and Drink)

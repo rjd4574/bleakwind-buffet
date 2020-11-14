@@ -121,6 +121,7 @@ namespace BleakwindBuffet.Data.Entrees
 		public GardenOrcOmelette()
 		{
 			_name = "Garden Orc Omelette";
+			_description = "Vegetarian. Two egg omelette packed with a mix of broccoli, mushrooms, and tomatoes. Topped with cheddar cheese.";
 			EntreeValues.SetDefaults(this);
 		}
 	}

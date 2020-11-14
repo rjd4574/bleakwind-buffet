@@ -21,6 +21,7 @@ namespace BleakwindBuffet.Data.Sides
 		public MadOtarGrits()
 		{
 			_name = "Mad Otar Grits";
+			_description = "Cheesey Grits.";
 			SideValues.SetDefaults(this);
 		}
 	}

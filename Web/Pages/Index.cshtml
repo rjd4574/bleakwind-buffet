@@ -109,9 +109,10 @@
             
                     <li>
                         <div class="Calories">@($"{item.Calories} Cal.")</div>
-                        <div class="String">@item.String</div>
+                        <div class="Name">@item.String</div>
                         <div class="Price">@String.Format("{0:c}", item.Price)</div>
                     </li>
+                    <div class="description">@item.Description</div>
                 }
             </div>
         }
